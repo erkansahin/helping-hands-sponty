@@ -1,6 +1,11 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:helping_hands_sponty/application/permission/permission_cubit.dart';
 
+import '../../application/app_life_cycle/app_life_cycle_cubit.dart';
+import '../../application/auth/auth_cubit.dart';
+import '../../application/location/location_cubit.dart';
 import '../../injection.dart';
 import '../routes/router.gr.dart';
 
@@ -19,14 +24,34 @@ class _AppWidgetState extends State<AppWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      builder: botToastBuilder,
-      routerDelegate: _appRouter.delegate(
-        navigatorObservers: () => [botToastNavigatorObserver],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<LocationCubit>(),
+          lazy: false,
+        ),
+        BlocProvider(
+          create: (context) => getIt<AuthCubit>(),
+          lazy: false,
+        ),
+        BlocProvider(
+          create: (context) => getIt<AppLifeCycleCubit>(),
+          lazy: false,
+        ),
+        BlocProvider(
+          create: (context) => getIt<PermissionCubit>(),
+          lazy: false,
+        ),
+      ],
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        builder: botToastBuilder,
+        routerDelegate: _appRouter.delegate(
+          navigatorObservers: () => [botToastNavigatorObserver],
+        ),
+        routeInformationParser: _appRouter.defaultRouteParser(),
+        title: 'Helping Hands',
       ),
-      routeInformationParser: _appRouter.defaultRouteParser(),
-      title: 'Helping Hands',
     );
   }
 }

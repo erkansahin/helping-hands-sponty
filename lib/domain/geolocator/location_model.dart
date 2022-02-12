@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'location_model.dart';
+
 part 'location_model.freezed.dart';
 
 @freezed

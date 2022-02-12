@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'auth_user_model.dart';
+part of 'auth_user_model_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,77 +14,86 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-/// @nodoc
-class _$AuthUserModelTearOff {
-  const _$AuthUserModelTearOff();
+AuthUserModelDto _$AuthUserModelDtoFromJson(Map<String, dynamic> json) {
+  return _AuthUserModelDto.fromJson(json);
+}
 
-  _AuthUserModel call(
+/// @nodoc
+class _$AuthUserModelDtoTearOff {
+  const _$AuthUserModelDtoTearOff();
+
+  _AuthUserModelDto call(
       {required String id,
-      required String phoneNumber,
       required String name,
+      required String phoneNumber,
       required double latitude,
       required double longitude,
       required String emergencyContactNumber,
-      required BloodType bloodType}) {
-    return _AuthUserModel(
+      required String bloodType}) {
+    return _AuthUserModelDto(
       id: id,
-      phoneNumber: phoneNumber,
       name: name,
+      phoneNumber: phoneNumber,
       latitude: latitude,
       longitude: longitude,
       emergencyContactNumber: emergencyContactNumber,
       bloodType: bloodType,
     );
   }
+
+  AuthUserModelDto fromJson(Map<String, Object?> json) {
+    return AuthUserModelDto.fromJson(json);
+  }
 }
 
 /// @nodoc
-const $AuthUserModel = _$AuthUserModelTearOff();
+const $AuthUserModelDto = _$AuthUserModelDtoTearOff();
 
 /// @nodoc
-mixin _$AuthUserModel {
+mixin _$AuthUserModelDto {
   String get id => throw _privateConstructorUsedError;
-  String get phoneNumber => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get phoneNumber => throw _privateConstructorUsedError;
   double get latitude => throw _privateConstructorUsedError;
   double get longitude => throw _privateConstructorUsedError;
   String get emergencyContactNumber => throw _privateConstructorUsedError;
-  BloodType get bloodType => throw _privateConstructorUsedError;
+  String get bloodType => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AuthUserModelCopyWith<AuthUserModel> get copyWith =>
+  $AuthUserModelDtoCopyWith<AuthUserModelDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AuthUserModelCopyWith<$Res> {
-  factory $AuthUserModelCopyWith(
-          AuthUserModel value, $Res Function(AuthUserModel) then) =
-      _$AuthUserModelCopyWithImpl<$Res>;
+abstract class $AuthUserModelDtoCopyWith<$Res> {
+  factory $AuthUserModelDtoCopyWith(
+          AuthUserModelDto value, $Res Function(AuthUserModelDto) then) =
+      _$AuthUserModelDtoCopyWithImpl<$Res>;
   $Res call(
       {String id,
-      String phoneNumber,
       String name,
+      String phoneNumber,
       double latitude,
       double longitude,
       String emergencyContactNumber,
-      BloodType bloodType});
+      String bloodType});
 }
 
 /// @nodoc
-class _$AuthUserModelCopyWithImpl<$Res>
-    implements $AuthUserModelCopyWith<$Res> {
-  _$AuthUserModelCopyWithImpl(this._value, this._then);
+class _$AuthUserModelDtoCopyWithImpl<$Res>
+    implements $AuthUserModelDtoCopyWith<$Res> {
+  _$AuthUserModelDtoCopyWithImpl(this._value, this._then);
 
-  final AuthUserModel _value;
+  final AuthUserModelDto _value;
   // ignore: unused_field
-  final $Res Function(AuthUserModel) _then;
+  final $Res Function(AuthUserModelDto) _then;
 
   @override
   $Res call({
     Object? id = freezed,
-    Object? phoneNumber = freezed,
     Object? name = freezed,
+    Object? phoneNumber = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
     Object? emergencyContactNumber = freezed,
@@ -95,13 +104,13 @@ class _$AuthUserModelCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneNumber: phoneNumber == freezed
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: phoneNumber == freezed
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
       latitude: latitude == freezed
           ? _value.latitude
@@ -118,61 +127,61 @@ class _$AuthUserModelCopyWithImpl<$Res>
       bloodType: bloodType == freezed
           ? _value.bloodType
           : bloodType // ignore: cast_nullable_to_non_nullable
-              as BloodType,
+              as String,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$AuthUserModelCopyWith<$Res>
-    implements $AuthUserModelCopyWith<$Res> {
-  factory _$AuthUserModelCopyWith(
-          _AuthUserModel value, $Res Function(_AuthUserModel) then) =
-      __$AuthUserModelCopyWithImpl<$Res>;
+abstract class _$AuthUserModelDtoCopyWith<$Res>
+    implements $AuthUserModelDtoCopyWith<$Res> {
+  factory _$AuthUserModelDtoCopyWith(
+          _AuthUserModelDto value, $Res Function(_AuthUserModelDto) then) =
+      __$AuthUserModelDtoCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
-      String phoneNumber,
       String name,
+      String phoneNumber,
       double latitude,
       double longitude,
       String emergencyContactNumber,
-      BloodType bloodType});
+      String bloodType});
 }
 
 /// @nodoc
-class __$AuthUserModelCopyWithImpl<$Res>
-    extends _$AuthUserModelCopyWithImpl<$Res>
-    implements _$AuthUserModelCopyWith<$Res> {
-  __$AuthUserModelCopyWithImpl(
-      _AuthUserModel _value, $Res Function(_AuthUserModel) _then)
-      : super(_value, (v) => _then(v as _AuthUserModel));
+class __$AuthUserModelDtoCopyWithImpl<$Res>
+    extends _$AuthUserModelDtoCopyWithImpl<$Res>
+    implements _$AuthUserModelDtoCopyWith<$Res> {
+  __$AuthUserModelDtoCopyWithImpl(
+      _AuthUserModelDto _value, $Res Function(_AuthUserModelDto) _then)
+      : super(_value, (v) => _then(v as _AuthUserModelDto));
 
   @override
-  _AuthUserModel get _value => super._value as _AuthUserModel;
+  _AuthUserModelDto get _value => super._value as _AuthUserModelDto;
 
   @override
   $Res call({
     Object? id = freezed,
-    Object? phoneNumber = freezed,
     Object? name = freezed,
+    Object? phoneNumber = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
     Object? emergencyContactNumber = freezed,
     Object? bloodType = freezed,
   }) {
-    return _then(_AuthUserModel(
+    return _then(_AuthUserModelDto(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneNumber: phoneNumber == freezed
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: phoneNumber == freezed
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
       latitude: latitude == freezed
           ? _value.latitude
@@ -189,30 +198,32 @@ class __$AuthUserModelCopyWithImpl<$Res>
       bloodType: bloodType == freezed
           ? _value.bloodType
           : bloodType // ignore: cast_nullable_to_non_nullable
-              as BloodType,
+              as String,
     ));
   }
 }
 
 /// @nodoc
-
-class _$_AuthUserModel extends _AuthUserModel {
-  const _$_AuthUserModel(
+@JsonSerializable()
+class _$_AuthUserModelDto implements _AuthUserModelDto {
+  _$_AuthUserModelDto(
       {required this.id,
-      required this.phoneNumber,
       required this.name,
+      required this.phoneNumber,
       required this.latitude,
       required this.longitude,
       required this.emergencyContactNumber,
-      required this.bloodType})
-      : super._();
+      required this.bloodType});
+
+  factory _$_AuthUserModelDto.fromJson(Map<String, dynamic> json) =>
+      _$$_AuthUserModelDtoFromJson(json);
 
   @override
   final String id;
   @override
-  final String phoneNumber;
-  @override
   final String name;
+  @override
+  final String phoneNumber;
   @override
   final double latitude;
   @override
@@ -220,22 +231,22 @@ class _$_AuthUserModel extends _AuthUserModel {
   @override
   final String emergencyContactNumber;
   @override
-  final BloodType bloodType;
+  final String bloodType;
 
   @override
   String toString() {
-    return 'AuthUserModel(id: $id, phoneNumber: $phoneNumber, name: $name, latitude: $latitude, longitude: $longitude, emergencyContactNumber: $emergencyContactNumber, bloodType: $bloodType)';
+    return 'AuthUserModelDto(id: $id, name: $name, phoneNumber: $phoneNumber, latitude: $latitude, longitude: $longitude, emergencyContactNumber: $emergencyContactNumber, bloodType: $bloodType)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AuthUserModel &&
+            other is _AuthUserModelDto &&
             const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
                 .equals(other.phoneNumber, phoneNumber) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.latitude, latitude) &&
             const DeepCollectionEquality().equals(other.longitude, longitude) &&
             const DeepCollectionEquality()
@@ -247,8 +258,8 @@ class _$_AuthUserModel extends _AuthUserModel {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(phoneNumber),
       const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(phoneNumber),
       const DeepCollectionEquality().hash(latitude),
       const DeepCollectionEquality().hash(longitude),
       const DeepCollectionEquality().hash(emergencyContactNumber),
@@ -256,27 +267,34 @@ class _$_AuthUserModel extends _AuthUserModel {
 
   @JsonKey(ignore: true)
   @override
-  _$AuthUserModelCopyWith<_AuthUserModel> get copyWith =>
-      __$AuthUserModelCopyWithImpl<_AuthUserModel>(this, _$identity);
+  _$AuthUserModelDtoCopyWith<_AuthUserModelDto> get copyWith =>
+      __$AuthUserModelDtoCopyWithImpl<_AuthUserModelDto>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_AuthUserModelDtoToJson(this);
+  }
 }
 
-abstract class _AuthUserModel extends AuthUserModel {
-  const factory _AuthUserModel(
+abstract class _AuthUserModelDto implements AuthUserModelDto {
+  factory _AuthUserModelDto(
       {required String id,
-      required String phoneNumber,
       required String name,
+      required String phoneNumber,
       required double latitude,
       required double longitude,
       required String emergencyContactNumber,
-      required BloodType bloodType}) = _$_AuthUserModel;
-  const _AuthUserModel._() : super._();
+      required String bloodType}) = _$_AuthUserModelDto;
+
+  factory _AuthUserModelDto.fromJson(Map<String, dynamic> json) =
+      _$_AuthUserModelDto.fromJson;
 
   @override
   String get id;
   @override
-  String get phoneNumber;
-  @override
   String get name;
+  @override
+  String get phoneNumber;
   @override
   double get latitude;
   @override
@@ -284,9 +302,9 @@ abstract class _AuthUserModel extends AuthUserModel {
   @override
   String get emergencyContactNumber;
   @override
-  BloodType get bloodType;
+  String get bloodType;
   @override
   @JsonKey(ignore: true)
-  _$AuthUserModelCopyWith<_AuthUserModel> get copyWith =>
+  _$AuthUserModelDtoCopyWith<_AuthUserModelDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
