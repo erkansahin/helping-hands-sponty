@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'app_life_cycle_state.dart';
 part 'app_life_cycle_cubit.freezed.dart';
+part 'app_life_cycle_state.dart';
 
 @singleton
 class AppLifeCycleCubit extends Cubit<AppLifeCycleState>

@@ -46,3 +46,4 @@ app.*.map.json
 /android/app/release
 
 lib/infrastructure/core/private.dart
+lib/presentation/routes/router.gr.dart
