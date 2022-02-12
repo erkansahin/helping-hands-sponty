@@ -7,6 +7,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:geodesy/geodesy.dart';
 
 import 'widgets/danger_button.dart';
+import 'widgets/danger_label.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -184,7 +185,28 @@ class _HomePageState extends State<HomePage> {
                   toggleDanger();
                 },
               ),
-            )
+            ),
+            Positioned(
+              left: 40,
+              right: 40,
+              top: 100,
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 250),
+                reverseDuration: const Duration(milliseconds: 250),
+                transitionBuilder: (child, animation) {
+                  return FadeTransition(
+                    opacity: CurvedAnimation(
+                        parent: animation, curve: Curves.easeIn),
+                    child: ScaleTransition(
+                      scale: CurvedAnimation(
+                          parent: animation, curve: Curves.easeOut),
+                      child: child,
+                    ),
+                  );
+                },
+                child: isInDanger ? DangerLabel() : const SizedBox.shrink(),
+              ),
+            ),
           ],
         ),
       ),
