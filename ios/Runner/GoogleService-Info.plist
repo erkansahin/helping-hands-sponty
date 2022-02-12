@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>153850275618-sdbgtj0t8nafvevojb72u3349tvu633k.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.153850275618-sdbgtj0t8nafvevojb72u3349tvu633k</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>153850275618-c3dsatv7si35tlmikmgpmt54bnq1jjjh.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCE60wNspn8GKVR1yByRc2oq4GdxslnJaY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>153850275618</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.sponty.helpinghands</string>
+	<key>PROJECT_ID</key>
+	<string>helping-hands-cb4bc</string>
+	<key>STORAGE_BUCKET</key>
+	<string>helping-hands-cb4bc.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:153850275618:ios:547672d43f31b7eccae77b</string>
+</dict>
+</plist>
