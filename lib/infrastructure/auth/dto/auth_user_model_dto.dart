@@ -18,6 +18,9 @@ class AuthUserModelDto with _$AuthUserModelDto {
     required double longitude,
     required String emergencyContactNumber,
     required String bloodType,
+    required String dangerDescription,
+    required String emergencyContactName,
+    required bool isInDanger,
   }) = _AuthUserModelDto;
 
   factory AuthUserModelDto.empty() =>
@@ -32,6 +35,9 @@ class AuthUserModelDto with _$AuthUserModelDto {
       longitude: userModel.longitude,
       emergencyContactNumber: userModel.emergencyContactNumber,
       bloodType: userModel.bloodType.name,
+      dangerDescription: userModel.dangerDescription,
+      emergencyContactName: userModel.emergencyContactName,
+      isInDanger: userModel.isInDanger,
     );
   }
 
@@ -57,6 +63,9 @@ extension AuthUserModelDtoX on AuthUserModelDto {
       emergencyContactNumber: emergencyContactNumber,
       bloodType:
           BloodType.values.firstWhere((element) => element.name == bloodType),
+      dangerDescription: dangerDescription,
+      emergencyContactName: emergencyContactName,
+      isInDanger: isInDanger,
     );
   }
 }

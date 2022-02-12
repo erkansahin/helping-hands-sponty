@@ -14,6 +14,9 @@ class AuthUserModel with _$AuthUserModel {
     required double longitude,
     required String emergencyContactNumber,
     required BloodType bloodType,
+    required bool isInDanger,
+    required String dangerDescription,
+    required String emergencyContactName,
   }) = _AuthUserModel;
 
   const AuthUserModel._();
@@ -26,5 +29,8 @@ class AuthUserModel with _$AuthUserModel {
         longitude: 0,
         name: '',
         bloodType: BloodType.unknown,
+        dangerDescription: '',
+        isInDanger: false,
+        emergencyContactName: '',
       );
 }
