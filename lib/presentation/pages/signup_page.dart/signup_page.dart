@@ -1,5 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:helping_hands_sponty/domain/auth/blood_type.dart';
+
+import '../../routes/router.gr.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -171,7 +174,11 @@ class _SignupPageState extends State<SignupPage> {
                       child: MaterialButton(
                         focusNode: buttonNode,
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        onPressed: () {},
+                        onPressed: () {
+                          AutoRouter.of(context).navigate(
+                            const HomeRoute(),
+                          );
+                        },
                         child: const Text(
                           "Kaydet",
                           style: TextStyle(

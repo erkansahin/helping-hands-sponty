@@ -3,7 +3,9 @@ import '../pages/signup_page.dart/signup_page.dart';
 
 import '../pages/home/home_page.dart';
 
-@MaterialAutoRouter(
+@CustomAutoRouter(
+  transitionsBuilder: TransitionsBuilders.fadeIn,
+  durationInMilliseconds: 200,
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
     AutoRoute(page: HomePage),
