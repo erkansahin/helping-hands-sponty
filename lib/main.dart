@@ -11,13 +11,13 @@ import 'presentation/core/app_widget.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  configureInjection(Environment.dev);
+
   final storage = await HydratedStorage.build(
     storageDirectory: kIsWeb
         ? HydratedStorage.webStorageDirectory
         : await getTemporaryDirectory(),
   );
-
+  configureInjection(Environment.dev);
   HydratedBlocOverrides.runZoned(
     () => runApp(const AppWidget()),
     storage: storage,
