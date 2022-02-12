@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:helping_hands_sponty/infrastructure/core/constants.dart';
 import 'package:helping_hands_sponty/infrastructure/core/private.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:geodesy/geodesy.dart';
 
 import 'widgets/danger_button.dart';
 import 'widgets/danger_label.dart';
+import 'widgets/user_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -177,6 +177,14 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Positioned(
+              top: 65,
+              child: UserCard(
+                onPressed: () {
+                  debugPrint("User card is pressed!");
+                },
+              ),
+            ),
+            Positioned(
               bottom: 30.0,
               child: DangerButton(
                 isInDanger: isInDanger,
@@ -189,7 +197,7 @@ class _HomePageState extends State<HomePage> {
             Positioned(
               left: 40,
               right: 40,
-              top: 100,
+              top: 175,
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 250),
                 reverseDuration: const Duration(milliseconds: 250),
@@ -204,7 +212,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 },
-                child: isInDanger ? DangerLabel() : const SizedBox.shrink(),
+                child:
+                    isInDanger ? const DangerLabel() : const SizedBox.shrink(),
               ),
             ),
           ],
