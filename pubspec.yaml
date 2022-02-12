@@ -41,6 +41,8 @@ dependencies:
   freezed: ^1.1.1
   geolocator: ^8.1.1
   get_it: ^7.2.0
+  # Use a fixed version as newer versions require Flutter >= 2.10
+  google_fonts: 2.2.0
   hydrated_bloc: ^8.0.0
   injectable: ^1.5.3
   json_annotation: ^4.4.0

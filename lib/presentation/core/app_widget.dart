@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:helping_hands_sponty/application/permission/permission_cubit.dart';
 
 import '../../application/app_life_cycle/app_life_cycle_cubit.dart';
@@ -46,6 +47,10 @@ class _AppWidgetState extends State<AppWidget> {
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         builder: botToastBuilder,
+        theme: ThemeData(
+            textTheme: GoogleFonts.quicksandTextTheme(
+          Theme.of(context).textTheme,
+        )),
         routerDelegate: _appRouter.delegate(
           navigatorObservers: () => [botToastNavigatorObserver],
         ),
