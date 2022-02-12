@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:fpdart/fpdart.dart';
 import 'package:helping_hands_sponty/domain/geolocator/location_model.dart';
+import 'package:helping_hands_sponty/infrastructure/core/json_converters.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/auth/auth_failure.dart';
@@ -111,4 +112,6 @@ class FirebaseAuthFacade implements IAuthService {
       return user;
     });
   }
+
+  
 }

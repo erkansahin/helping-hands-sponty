@@ -32,7 +32,9 @@ class _$AuthUserModelDtoTearOff {
       required String bloodType,
       required String dangerDescription,
       required String emergencyContactName,
-      required bool isInDanger}) {
+      required bool isInDanger,
+      @JsonKey(fromJson: sendDateTimeFromJson, toJson: sendDateTimeToJson)
+          required DateTime inDangerDate}) {
     return _AuthUserModelDto(
       id: id,
       name: name,
@@ -44,6 +46,7 @@ class _$AuthUserModelDtoTearOff {
       dangerDescription: dangerDescription,
       emergencyContactName: emergencyContactName,
       isInDanger: isInDanger,
+      inDangerDate: inDangerDate,
     );
   }
 
@@ -67,6 +70,8 @@ mixin _$AuthUserModelDto {
   String get dangerDescription => throw _privateConstructorUsedError;
   String get emergencyContactName => throw _privateConstructorUsedError;
   bool get isInDanger => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: sendDateTimeFromJson, toJson: sendDateTimeToJson)
+  DateTime get inDangerDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -89,7 +94,9 @@ abstract class $AuthUserModelDtoCopyWith<$Res> {
       String bloodType,
       String dangerDescription,
       String emergencyContactName,
-      bool isInDanger});
+      bool isInDanger,
+      @JsonKey(fromJson: sendDateTimeFromJson, toJson: sendDateTimeToJson)
+          DateTime inDangerDate});
 }
 
 /// @nodoc
@@ -113,6 +120,7 @@ class _$AuthUserModelDtoCopyWithImpl<$Res>
     Object? dangerDescription = freezed,
     Object? emergencyContactName = freezed,
     Object? isInDanger = freezed,
+    Object? inDangerDate = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -155,6 +163,10 @@ class _$AuthUserModelDtoCopyWithImpl<$Res>
           ? _value.isInDanger
           : isInDanger // ignore: cast_nullable_to_non_nullable
               as bool,
+      inDangerDate: inDangerDate == freezed
+          ? _value.inDangerDate
+          : inDangerDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -176,7 +188,9 @@ abstract class _$AuthUserModelDtoCopyWith<$Res>
       String bloodType,
       String dangerDescription,
       String emergencyContactName,
-      bool isInDanger});
+      bool isInDanger,
+      @JsonKey(fromJson: sendDateTimeFromJson, toJson: sendDateTimeToJson)
+          DateTime inDangerDate});
 }
 
 /// @nodoc
@@ -202,6 +216,7 @@ class __$AuthUserModelDtoCopyWithImpl<$Res>
     Object? dangerDescription = freezed,
     Object? emergencyContactName = freezed,
     Object? isInDanger = freezed,
+    Object? inDangerDate = freezed,
   }) {
     return _then(_AuthUserModelDto(
       id: id == freezed
@@ -244,6 +259,10 @@ class __$AuthUserModelDtoCopyWithImpl<$Res>
           ? _value.isInDanger
           : isInDanger // ignore: cast_nullable_to_non_nullable
               as bool,
+      inDangerDate: inDangerDate == freezed
+          ? _value.inDangerDate
+          : inDangerDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -261,7 +280,9 @@ class _$_AuthUserModelDto implements _AuthUserModelDto {
       required this.bloodType,
       required this.dangerDescription,
       required this.emergencyContactName,
-      required this.isInDanger});
+      required this.isInDanger,
+      @JsonKey(fromJson: sendDateTimeFromJson, toJson: sendDateTimeToJson)
+          required this.inDangerDate});
 
   factory _$_AuthUserModelDto.fromJson(Map<String, dynamic> json) =>
       _$$_AuthUserModelDtoFromJson(json);
@@ -286,10 +307,13 @@ class _$_AuthUserModelDto implements _AuthUserModelDto {
   final String emergencyContactName;
   @override
   final bool isInDanger;
+  @override
+  @JsonKey(fromJson: sendDateTimeFromJson, toJson: sendDateTimeToJson)
+  final DateTime inDangerDate;
 
   @override
   String toString() {
-    return 'AuthUserModelDto(id: $id, name: $name, phoneNumber: $phoneNumber, latitude: $latitude, longitude: $longitude, emergencyContactNumber: $emergencyContactNumber, bloodType: $bloodType, dangerDescription: $dangerDescription, emergencyContactName: $emergencyContactName, isInDanger: $isInDanger)';
+    return 'AuthUserModelDto(id: $id, name: $name, phoneNumber: $phoneNumber, latitude: $latitude, longitude: $longitude, emergencyContactNumber: $emergencyContactNumber, bloodType: $bloodType, dangerDescription: $dangerDescription, emergencyContactName: $emergencyContactName, isInDanger: $isInDanger, inDangerDate: $inDangerDate)';
   }
 
   @override
@@ -311,7 +335,9 @@ class _$_AuthUserModelDto implements _AuthUserModelDto {
             const DeepCollectionEquality()
                 .equals(other.emergencyContactName, emergencyContactName) &&
             const DeepCollectionEquality()
-                .equals(other.isInDanger, isInDanger));
+                .equals(other.isInDanger, isInDanger) &&
+            const DeepCollectionEquality()
+                .equals(other.inDangerDate, inDangerDate));
   }
 
   @override
@@ -326,7 +352,8 @@ class _$_AuthUserModelDto implements _AuthUserModelDto {
       const DeepCollectionEquality().hash(bloodType),
       const DeepCollectionEquality().hash(dangerDescription),
       const DeepCollectionEquality().hash(emergencyContactName),
-      const DeepCollectionEquality().hash(isInDanger));
+      const DeepCollectionEquality().hash(isInDanger),
+      const DeepCollectionEquality().hash(inDangerDate));
 
   @JsonKey(ignore: true)
   @override
@@ -350,7 +377,9 @@ abstract class _AuthUserModelDto implements AuthUserModelDto {
       required String bloodType,
       required String dangerDescription,
       required String emergencyContactName,
-      required bool isInDanger}) = _$_AuthUserModelDto;
+      required bool isInDanger,
+      @JsonKey(fromJson: sendDateTimeFromJson, toJson: sendDateTimeToJson)
+          required DateTime inDangerDate}) = _$_AuthUserModelDto;
 
   factory _AuthUserModelDto.fromJson(Map<String, dynamic> json) =
       _$_AuthUserModelDto.fromJson;
@@ -375,6 +404,9 @@ abstract class _AuthUserModelDto implements AuthUserModelDto {
   String get emergencyContactName;
   @override
   bool get isInDanger;
+  @override
+  @JsonKey(fromJson: sendDateTimeFromJson, toJson: sendDateTimeToJson)
+  DateTime get inDangerDate;
   @override
   @JsonKey(ignore: true)
   _$AuthUserModelDtoCopyWith<_AuthUserModelDto> get copyWith =>

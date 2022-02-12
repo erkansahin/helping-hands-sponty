@@ -17,11 +17,12 @@ class AuthUserModel with _$AuthUserModel {
     required bool isInDanger,
     required String dangerDescription,
     required String emergencyContactName,
+    required DateTime inDangerDate,
   }) = _AuthUserModel;
 
   const AuthUserModel._();
 
-  factory AuthUserModel.empty() => const AuthUserModel(
+  factory AuthUserModel.empty() => AuthUserModel(
         id: '',
         phoneNumber: '',
         emergencyContactNumber: '',
@@ -32,5 +33,6 @@ class AuthUserModel with _$AuthUserModel {
         dangerDescription: '',
         isInDanger: false,
         emergencyContactName: '',
+        inDangerDate: DateTime.fromMillisecondsSinceEpoch(0),
       );
 }
