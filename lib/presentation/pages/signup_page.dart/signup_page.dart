@@ -10,7 +10,9 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   InputDecoration decoration = const InputDecoration(
-    border: OutlineInputBorder(),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+    ),
     labelStyle: TextStyle(fontSize: 18),
   );
 
