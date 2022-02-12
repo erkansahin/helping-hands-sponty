@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import '../../routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -181,6 +183,9 @@ class _HomePageState extends State<HomePage> {
               child: UserCard(
                 onPressed: () {
                   debugPrint("User card is pressed!");
+                  AutoRouter.of(context).navigate(
+                    const SignupRoute(),
+                  );
                 },
               ),
             ),
