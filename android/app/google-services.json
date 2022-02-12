@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "153850275618",
+    "project_id": "helping-hands-cb4bc",
+    "storage_bucket": "helping-hands-cb4bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153850275618:android:b50fad3768bc0672cae77b",
+        "android_client_info": {
+          "package_name": "com.sponty.helpinghands"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153850275618-c3dsatv7si35tlmikmgpmt54bnq1jjjh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sponty.helpinghands",
+            "certificate_hash": "858f4260347def0788dc7c86b50de17abc1d953f"
+          }
+        },
+        {
+          "client_id": "153850275618-k9o8v2b24qhsfq7kl5bbm8o2fc4iabia.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkaTX2dbUCYdWTRCjIxsIqcPhW-IsKyFU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "153850275618-k9o8v2b24qhsfq7kl5bbm8o2fc4iabia.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
