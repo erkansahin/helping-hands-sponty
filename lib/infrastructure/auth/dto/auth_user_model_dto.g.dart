@@ -15,6 +15,9 @@ _$_AuthUserModelDto _$$_AuthUserModelDtoFromJson(Map<String, dynamic> json) =>
       longitude: (json['longitude'] as num).toDouble(),
       emergencyContactNumber: json['emergencyContactNumber'] as String,
       bloodType: json['bloodType'] as String,
+      dangerDescription: json['dangerDescription'] as String,
+      emergencyContactName: json['emergencyContactName'] as String,
+      isInDanger: json['isInDanger'] as bool,
     );
 
 Map<String, dynamic> _$$_AuthUserModelDtoToJson(_$_AuthUserModelDto instance) =>
@@ -26,4 +29,7 @@ Map<String, dynamic> _$$_AuthUserModelDtoToJson(_$_AuthUserModelDto instance) =>
       'longitude': instance.longitude,
       'emergencyContactNumber': instance.emergencyContactNumber,
       'bloodType': instance.bloodType,
+      'dangerDescription': instance.dangerDescription,
+      'emergencyContactName': instance.emergencyContactName,
+      'isInDanger': instance.isInDanger,
     };

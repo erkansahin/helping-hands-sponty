@@ -29,7 +29,10 @@ class _$AuthUserModelDtoTearOff {
       required double latitude,
       required double longitude,
       required String emergencyContactNumber,
-      required String bloodType}) {
+      required String bloodType,
+      required String dangerDescription,
+      required String emergencyContactName,
+      required bool isInDanger}) {
     return _AuthUserModelDto(
       id: id,
       name: name,
@@ -38,6 +41,9 @@ class _$AuthUserModelDtoTearOff {
       longitude: longitude,
       emergencyContactNumber: emergencyContactNumber,
       bloodType: bloodType,
+      dangerDescription: dangerDescription,
+      emergencyContactName: emergencyContactName,
+      isInDanger: isInDanger,
     );
   }
 
@@ -58,6 +64,9 @@ mixin _$AuthUserModelDto {
   double get longitude => throw _privateConstructorUsedError;
   String get emergencyContactNumber => throw _privateConstructorUsedError;
   String get bloodType => throw _privateConstructorUsedError;
+  String get dangerDescription => throw _privateConstructorUsedError;
+  String get emergencyContactName => throw _privateConstructorUsedError;
+  bool get isInDanger => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -77,7 +86,10 @@ abstract class $AuthUserModelDtoCopyWith<$Res> {
       double latitude,
       double longitude,
       String emergencyContactNumber,
-      String bloodType});
+      String bloodType,
+      String dangerDescription,
+      String emergencyContactName,
+      bool isInDanger});
 }
 
 /// @nodoc
@@ -98,6 +110,9 @@ class _$AuthUserModelDtoCopyWithImpl<$Res>
     Object? longitude = freezed,
     Object? emergencyContactNumber = freezed,
     Object? bloodType = freezed,
+    Object? dangerDescription = freezed,
+    Object? emergencyContactName = freezed,
+    Object? isInDanger = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -128,6 +143,18 @@ class _$AuthUserModelDtoCopyWithImpl<$Res>
           ? _value.bloodType
           : bloodType // ignore: cast_nullable_to_non_nullable
               as String,
+      dangerDescription: dangerDescription == freezed
+          ? _value.dangerDescription
+          : dangerDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      emergencyContactName: emergencyContactName == freezed
+          ? _value.emergencyContactName
+          : emergencyContactName // ignore: cast_nullable_to_non_nullable
+              as String,
+      isInDanger: isInDanger == freezed
+          ? _value.isInDanger
+          : isInDanger // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -146,7 +173,10 @@ abstract class _$AuthUserModelDtoCopyWith<$Res>
       double latitude,
       double longitude,
       String emergencyContactNumber,
-      String bloodType});
+      String bloodType,
+      String dangerDescription,
+      String emergencyContactName,
+      bool isInDanger});
 }
 
 /// @nodoc
@@ -169,6 +199,9 @@ class __$AuthUserModelDtoCopyWithImpl<$Res>
     Object? longitude = freezed,
     Object? emergencyContactNumber = freezed,
     Object? bloodType = freezed,
+    Object? dangerDescription = freezed,
+    Object? emergencyContactName = freezed,
+    Object? isInDanger = freezed,
   }) {
     return _then(_AuthUserModelDto(
       id: id == freezed
@@ -199,6 +232,18 @@ class __$AuthUserModelDtoCopyWithImpl<$Res>
           ? _value.bloodType
           : bloodType // ignore: cast_nullable_to_non_nullable
               as String,
+      dangerDescription: dangerDescription == freezed
+          ? _value.dangerDescription
+          : dangerDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      emergencyContactName: emergencyContactName == freezed
+          ? _value.emergencyContactName
+          : emergencyContactName // ignore: cast_nullable_to_non_nullable
+              as String,
+      isInDanger: isInDanger == freezed
+          ? _value.isInDanger
+          : isInDanger // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -213,7 +258,10 @@ class _$_AuthUserModelDto implements _AuthUserModelDto {
       required this.latitude,
       required this.longitude,
       required this.emergencyContactNumber,
-      required this.bloodType});
+      required this.bloodType,
+      required this.dangerDescription,
+      required this.emergencyContactName,
+      required this.isInDanger});
 
   factory _$_AuthUserModelDto.fromJson(Map<String, dynamic> json) =>
       _$$_AuthUserModelDtoFromJson(json);
@@ -232,10 +280,16 @@ class _$_AuthUserModelDto implements _AuthUserModelDto {
   final String emergencyContactNumber;
   @override
   final String bloodType;
+  @override
+  final String dangerDescription;
+  @override
+  final String emergencyContactName;
+  @override
+  final bool isInDanger;
 
   @override
   String toString() {
-    return 'AuthUserModelDto(id: $id, name: $name, phoneNumber: $phoneNumber, latitude: $latitude, longitude: $longitude, emergencyContactNumber: $emergencyContactNumber, bloodType: $bloodType)';
+    return 'AuthUserModelDto(id: $id, name: $name, phoneNumber: $phoneNumber, latitude: $latitude, longitude: $longitude, emergencyContactNumber: $emergencyContactNumber, bloodType: $bloodType, dangerDescription: $dangerDescription, emergencyContactName: $emergencyContactName, isInDanger: $isInDanger)';
   }
 
   @override
@@ -251,7 +305,13 @@ class _$_AuthUserModelDto implements _AuthUserModelDto {
             const DeepCollectionEquality().equals(other.longitude, longitude) &&
             const DeepCollectionEquality()
                 .equals(other.emergencyContactNumber, emergencyContactNumber) &&
-            const DeepCollectionEquality().equals(other.bloodType, bloodType));
+            const DeepCollectionEquality().equals(other.bloodType, bloodType) &&
+            const DeepCollectionEquality()
+                .equals(other.dangerDescription, dangerDescription) &&
+            const DeepCollectionEquality()
+                .equals(other.emergencyContactName, emergencyContactName) &&
+            const DeepCollectionEquality()
+                .equals(other.isInDanger, isInDanger));
   }
 
   @override
@@ -263,7 +323,10 @@ class _$_AuthUserModelDto implements _AuthUserModelDto {
       const DeepCollectionEquality().hash(latitude),
       const DeepCollectionEquality().hash(longitude),
       const DeepCollectionEquality().hash(emergencyContactNumber),
-      const DeepCollectionEquality().hash(bloodType));
+      const DeepCollectionEquality().hash(bloodType),
+      const DeepCollectionEquality().hash(dangerDescription),
+      const DeepCollectionEquality().hash(emergencyContactName),
+      const DeepCollectionEquality().hash(isInDanger));
 
   @JsonKey(ignore: true)
   @override
@@ -284,7 +347,10 @@ abstract class _AuthUserModelDto implements AuthUserModelDto {
       required double latitude,
       required double longitude,
       required String emergencyContactNumber,
-      required String bloodType}) = _$_AuthUserModelDto;
+      required String bloodType,
+      required String dangerDescription,
+      required String emergencyContactName,
+      required bool isInDanger}) = _$_AuthUserModelDto;
 
   factory _AuthUserModelDto.fromJson(Map<String, dynamic> json) =
       _$_AuthUserModelDto.fromJson;
@@ -303,6 +369,12 @@ abstract class _AuthUserModelDto implements AuthUserModelDto {
   String get emergencyContactNumber;
   @override
   String get bloodType;
+  @override
+  String get dangerDescription;
+  @override
+  String get emergencyContactName;
+  @override
+  bool get isInDanger;
   @override
   @JsonKey(ignore: true)
   _$AuthUserModelDtoCopyWith<_AuthUserModelDto> get copyWith =>
