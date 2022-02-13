@@ -28,7 +28,8 @@ class _$AuthUserModelTearOff {
       required BloodType bloodType,
       required bool isInDanger,
       required String dangerDescription,
-      required String emergencyContactName}) {
+      required String emergencyContactName,
+      required DateTime inDangerDate}) {
     return _AuthUserModel(
       id: id,
       phoneNumber: phoneNumber,
@@ -40,6 +41,7 @@ class _$AuthUserModelTearOff {
       isInDanger: isInDanger,
       dangerDescription: dangerDescription,
       emergencyContactName: emergencyContactName,
+      inDangerDate: inDangerDate,
     );
   }
 }
@@ -59,6 +61,7 @@ mixin _$AuthUserModel {
   bool get isInDanger => throw _privateConstructorUsedError;
   String get dangerDescription => throw _privateConstructorUsedError;
   String get emergencyContactName => throw _privateConstructorUsedError;
+  DateTime get inDangerDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthUserModelCopyWith<AuthUserModel> get copyWith =>
@@ -80,7 +83,8 @@ abstract class $AuthUserModelCopyWith<$Res> {
       BloodType bloodType,
       bool isInDanger,
       String dangerDescription,
-      String emergencyContactName});
+      String emergencyContactName,
+      DateTime inDangerDate});
 }
 
 /// @nodoc
@@ -104,6 +108,7 @@ class _$AuthUserModelCopyWithImpl<$Res>
     Object? isInDanger = freezed,
     Object? dangerDescription = freezed,
     Object? emergencyContactName = freezed,
+    Object? inDangerDate = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -146,6 +151,10 @@ class _$AuthUserModelCopyWithImpl<$Res>
           ? _value.emergencyContactName
           : emergencyContactName // ignore: cast_nullable_to_non_nullable
               as String,
+      inDangerDate: inDangerDate == freezed
+          ? _value.inDangerDate
+          : inDangerDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -167,7 +176,8 @@ abstract class _$AuthUserModelCopyWith<$Res>
       BloodType bloodType,
       bool isInDanger,
       String dangerDescription,
-      String emergencyContactName});
+      String emergencyContactName,
+      DateTime inDangerDate});
 }
 
 /// @nodoc
@@ -193,6 +203,7 @@ class __$AuthUserModelCopyWithImpl<$Res>
     Object? isInDanger = freezed,
     Object? dangerDescription = freezed,
     Object? emergencyContactName = freezed,
+    Object? inDangerDate = freezed,
   }) {
     return _then(_AuthUserModel(
       id: id == freezed
@@ -235,6 +246,10 @@ class __$AuthUserModelCopyWithImpl<$Res>
           ? _value.emergencyContactName
           : emergencyContactName // ignore: cast_nullable_to_non_nullable
               as String,
+      inDangerDate: inDangerDate == freezed
+          ? _value.inDangerDate
+          : inDangerDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -252,7 +267,8 @@ class _$_AuthUserModel extends _AuthUserModel {
       required this.bloodType,
       required this.isInDanger,
       required this.dangerDescription,
-      required this.emergencyContactName})
+      required this.emergencyContactName,
+      required this.inDangerDate})
       : super._();
 
   @override
@@ -275,10 +291,12 @@ class _$_AuthUserModel extends _AuthUserModel {
   final String dangerDescription;
   @override
   final String emergencyContactName;
+  @override
+  final DateTime inDangerDate;
 
   @override
   String toString() {
-    return 'AuthUserModel(id: $id, phoneNumber: $phoneNumber, name: $name, latitude: $latitude, longitude: $longitude, emergencyContactNumber: $emergencyContactNumber, bloodType: $bloodType, isInDanger: $isInDanger, dangerDescription: $dangerDescription, emergencyContactName: $emergencyContactName)';
+    return 'AuthUserModel(id: $id, phoneNumber: $phoneNumber, name: $name, latitude: $latitude, longitude: $longitude, emergencyContactNumber: $emergencyContactNumber, bloodType: $bloodType, isInDanger: $isInDanger, dangerDescription: $dangerDescription, emergencyContactName: $emergencyContactName, inDangerDate: $inDangerDate)';
   }
 
   @override
@@ -300,7 +318,9 @@ class _$_AuthUserModel extends _AuthUserModel {
             const DeepCollectionEquality()
                 .equals(other.dangerDescription, dangerDescription) &&
             const DeepCollectionEquality()
-                .equals(other.emergencyContactName, emergencyContactName));
+                .equals(other.emergencyContactName, emergencyContactName) &&
+            const DeepCollectionEquality()
+                .equals(other.inDangerDate, inDangerDate));
   }
 
   @override
@@ -315,7 +335,8 @@ class _$_AuthUserModel extends _AuthUserModel {
       const DeepCollectionEquality().hash(bloodType),
       const DeepCollectionEquality().hash(isInDanger),
       const DeepCollectionEquality().hash(dangerDescription),
-      const DeepCollectionEquality().hash(emergencyContactName));
+      const DeepCollectionEquality().hash(emergencyContactName),
+      const DeepCollectionEquality().hash(inDangerDate));
 
   @JsonKey(ignore: true)
   @override
@@ -334,7 +355,8 @@ abstract class _AuthUserModel extends AuthUserModel {
       required BloodType bloodType,
       required bool isInDanger,
       required String dangerDescription,
-      required String emergencyContactName}) = _$_AuthUserModel;
+      required String emergencyContactName,
+      required DateTime inDangerDate}) = _$_AuthUserModel;
   const _AuthUserModel._() : super._();
 
   @override
@@ -357,6 +379,8 @@ abstract class _AuthUserModel extends AuthUserModel {
   String get dangerDescription;
   @override
   String get emergencyContactName;
+  @override
+  DateTime get inDangerDate;
   @override
   @JsonKey(ignore: true)
   _$AuthUserModelCopyWith<_AuthUserModel> get copyWith =>

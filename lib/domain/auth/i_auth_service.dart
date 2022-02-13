@@ -10,6 +10,7 @@ abstract class IAuthService {
 
   Stream<AuthUserModel> databaseUserChanges({required String userId});
 
+
   Future<Option<Unit>> saveUserToDatabase({
     required AuthUserModel userModel,
   });

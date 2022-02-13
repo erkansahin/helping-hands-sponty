@@ -7,6 +7,7 @@ import 'package:helping_hands_sponty/application/permission/permission_cubit.dar
 import '../../application/app_life_cycle/app_life_cycle_cubit.dart';
 import '../../application/auth/auth_cubit.dart';
 import '../../application/location/location_cubit.dart';
+import '../../application/map/map_cubit.dart';
 import '../../injection.dart';
 import '../routes/router.gr.dart';
 
@@ -41,6 +42,10 @@ class _AppWidgetState extends State<AppWidget> {
         ),
         BlocProvider(
           create: (context) => getIt<PermissionCubit>(),
+          lazy: false,
+        ),
+        BlocProvider(
+          create: (context) => getIt<MapCubit>(),
           lazy: false,
         ),
       ],

@@ -18,6 +18,7 @@ _$_AuthUserModelDto _$$_AuthUserModelDtoFromJson(Map<String, dynamic> json) =>
       dangerDescription: json['dangerDescription'] as String,
       emergencyContactName: json['emergencyContactName'] as String,
       isInDanger: json['isInDanger'] as bool,
+      inDangerDate: sendDateTimeFromJson(json['inDangerDate']),
     );
 
 Map<String, dynamic> _$$_AuthUserModelDtoToJson(_$_AuthUserModelDto instance) =>
@@ -32,4 +33,5 @@ Map<String, dynamic> _$$_AuthUserModelDtoToJson(_$_AuthUserModelDto instance) =>
       'dangerDescription': instance.dangerDescription,
       'emergencyContactName': instance.emergencyContactName,
       'isInDanger': instance.isInDanger,
+      'inDangerDate': sendDateTimeToJson(instance.inDangerDate),
     };
