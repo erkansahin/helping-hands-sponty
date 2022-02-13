@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:helping_hands_sponty/application/auth/auth_cubit.dart';
 import 'package:helping_hands_sponty/application/location/location_cubit.dart';
 import 'package:helping_hands_sponty/application/map/map_cubit.dart';
+import 'package:helping_hands_sponty/application/permission/permission_cubit.dart';
 import 'package:helping_hands_sponty/domain/auth/auth_user_model.dart';
 import 'package:helping_hands_sponty/presentation/pages/home/widgets/alert_animation_widget.dart';
 import 'package:helping_hands_sponty/presentation/pages/home/widgets/location_widget.dart';
@@ -366,11 +367,11 @@ class _HomePageState extends State<HomePage> {
                         !locationState.isLocationPermissionAndServicesAvailable,
                     onPressed: () {
                       debugPrint("Location widget pressed!");
-                      if (!locationState.isLocationPermissionGranted) {
-                        context
-                            .read<LocationCubit>()
-                            .requestLocationPermission();
-                      } else if (!locationState.isLocationServicesEnabled) {
+                      context
+                          .read<PermissionCubit>()
+                          .handleLocationPermissionAndServices();
+                      debugPrint("Location widget pressed!");
+                      if (!locationState.isLocationServicesEnabled) {
                         context.read<LocationCubit>().openAppSettings();
                       } else if (locationState.isExactLocationAvailable) {
                         mapController.move(
