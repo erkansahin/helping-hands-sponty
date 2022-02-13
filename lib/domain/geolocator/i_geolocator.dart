@@ -5,6 +5,7 @@ abstract class IGeolocator {
   Future<void> openAppSettings();
   Future<bool> isLocationPermissionGranted();
   Future<bool> isLocationServicesEnabled();
+  Future<LocationModel> getLocationFromIP();
   Future<bool> openLocationSettings();
   Stream<LocationModel> get positionStream;
 

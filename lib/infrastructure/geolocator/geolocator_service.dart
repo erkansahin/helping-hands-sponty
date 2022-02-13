@@ -1,9 +1,16 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 
+import 'package:get_ip_address/get_ip_address.dart';
+import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
 import 'package:helping_hands_sponty/domain/geolocator/i_geolocator.dart';
 import 'package:helping_hands_sponty/domain/geolocator/location_model.dart';
 import 'package:injectable/injectable.dart';
+
+import '../core/private.dart';
 
 @LazySingleton(as: IGeolocator)
 class GeoLocatorService implements IGeolocator {
@@ -58,5 +65,25 @@ class GeoLocatorService implements IGeolocator {
   @override
   Future<void> openAppSettings() {
     return Geolocator.openAppSettings();
+  }
+
+  @override
+  Future<LocationModel> getLocationFromIP() async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+            "https://api.ipgeolocation.io/ipgeo?apiKey=$ipgeolocationKey"),
+      );
+
+      final body = jsonDecode(response.body);
+
+      final double lat = double.parse(body["latitude"]);
+      final double lon = double.parse(body["longitude"]);
+
+      return LocationModel(latitude: lat, longitude: lon);
+    } catch (e) {
+      log("getLocationFromIP error $e");
+      return LocationModel.empty();
+    }
   }
 }
