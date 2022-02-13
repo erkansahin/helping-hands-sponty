@@ -92,12 +92,14 @@ class FirebaseAuthFacade implements IAuthService {
   @override
   Future<Option<Unit>> saveUserToDatabase(
       {required AuthUserModel userModel}) async {
+    print(userModel);
     try {
       _firestore.authUserCollection
-          .doc(userModel.id)
+          .doc(_firebaseAuth.currentUser!.uid)
           .set(AuthUserModelDto.fromDomain(userModel).toJson());
       return some(unit);
     } catch (e) {
+      print("saveUserToDatabase error: $e");
       return none();
     }
     //
