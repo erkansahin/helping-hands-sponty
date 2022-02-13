@@ -175,7 +175,7 @@ class __$LocationStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LocationState extends _LocationState {
+class _$_LocationState extends _LocationState with DiagnosticableTreeMixin {
   const _$_LocationState(
       {required this.exactLocation,
       required this.locationPermissionStatus,
@@ -193,8 +193,22 @@ class _$_LocationState extends _LocationState {
   final bool isLocationUpdateInProgress;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'LocationState(exactLocation: $exactLocation, locationPermissionStatus: $locationPermissionStatus, isLocationServicesEnabled: $isLocationServicesEnabled, isLocationUpdateInProgress: $isLocationUpdateInProgress)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'LocationState'))
+      ..add(DiagnosticsProperty('exactLocation', exactLocation))
+      ..add(DiagnosticsProperty(
+          'locationPermissionStatus', locationPermissionStatus))
+      ..add(DiagnosticsProperty(
+          'isLocationServicesEnabled', isLocationServicesEnabled))
+      ..add(DiagnosticsProperty(
+          'isLocationUpdateInProgress', isLocationUpdateInProgress));
   }
 
   @override
