@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:helping_hands_sponty/application/auth/auth_cubit.dart';
 import '../../routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -183,8 +185,10 @@ class _HomePageState extends State<HomePage> {
               child: UserCard(
                 onPressed: () {
                   debugPrint("User card is pressed!");
+                  final user =
+                      BlocProvider.of<AuthCubit>(context).state.userModel;
                   AutoRouter.of(context).navigate(
-                    const SignupRoute(),
+                    SignupRoute(edit: true, user: user),
                   );
                 },
               ),

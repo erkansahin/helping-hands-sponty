@@ -21,11 +21,15 @@ class _$AuthStateTearOff {
   _AuthState call(
       {required AuthUserModel userModel,
       required bool isUserCheckedFromAuthService,
-      required bool isAnonymousLoginInProgress}) {
+      required bool isAnonymousLoginInProgress,
+      required bool isSignupInProgress,
+      required bool isLoginInProgress}) {
     return _AuthState(
       userModel: userModel,
       isUserCheckedFromAuthService: isUserCheckedFromAuthService,
       isAnonymousLoginInProgress: isAnonymousLoginInProgress,
+      isSignupInProgress: isSignupInProgress,
+      isLoginInProgress: isLoginInProgress,
     );
   }
 }
@@ -38,6 +42,8 @@ mixin _$AuthState {
   AuthUserModel get userModel => throw _privateConstructorUsedError;
   bool get isUserCheckedFromAuthService => throw _privateConstructorUsedError;
   bool get isAnonymousLoginInProgress => throw _privateConstructorUsedError;
+  bool get isSignupInProgress => throw _privateConstructorUsedError;
+  bool get isLoginInProgress => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthStateCopyWith<AuthState> get copyWith =>
@@ -51,7 +57,9 @@ abstract class $AuthStateCopyWith<$Res> {
   $Res call(
       {AuthUserModel userModel,
       bool isUserCheckedFromAuthService,
-      bool isAnonymousLoginInProgress});
+      bool isAnonymousLoginInProgress,
+      bool isSignupInProgress,
+      bool isLoginInProgress});
 
   $AuthUserModelCopyWith<$Res> get userModel;
 }
@@ -69,6 +77,8 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
     Object? userModel = freezed,
     Object? isUserCheckedFromAuthService = freezed,
     Object? isAnonymousLoginInProgress = freezed,
+    Object? isSignupInProgress = freezed,
+    Object? isLoginInProgress = freezed,
   }) {
     return _then(_value.copyWith(
       userModel: userModel == freezed
@@ -82,6 +92,14 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
       isAnonymousLoginInProgress: isAnonymousLoginInProgress == freezed
           ? _value.isAnonymousLoginInProgress
           : isAnonymousLoginInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSignupInProgress: isSignupInProgress == freezed
+          ? _value.isSignupInProgress
+          : isSignupInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoginInProgress: isLoginInProgress == freezed
+          ? _value.isLoginInProgress
+          : isLoginInProgress // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -103,7 +121,9 @@ abstract class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
   $Res call(
       {AuthUserModel userModel,
       bool isUserCheckedFromAuthService,
-      bool isAnonymousLoginInProgress});
+      bool isAnonymousLoginInProgress,
+      bool isSignupInProgress,
+      bool isLoginInProgress});
 
   @override
   $AuthUserModelCopyWith<$Res> get userModel;
@@ -123,6 +143,8 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
     Object? userModel = freezed,
     Object? isUserCheckedFromAuthService = freezed,
     Object? isAnonymousLoginInProgress = freezed,
+    Object? isSignupInProgress = freezed,
+    Object? isLoginInProgress = freezed,
   }) {
     return _then(_AuthState(
       userModel: userModel == freezed
@@ -137,6 +159,14 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
           ? _value.isAnonymousLoginInProgress
           : isAnonymousLoginInProgress // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSignupInProgress: isSignupInProgress == freezed
+          ? _value.isSignupInProgress
+          : isSignupInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoginInProgress: isLoginInProgress == freezed
+          ? _value.isLoginInProgress
+          : isLoginInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -147,7 +177,9 @@ class _$_AuthState extends _AuthState with DiagnosticableTreeMixin {
   const _$_AuthState(
       {required this.userModel,
       required this.isUserCheckedFromAuthService,
-      required this.isAnonymousLoginInProgress})
+      required this.isAnonymousLoginInProgress,
+      required this.isSignupInProgress,
+      required this.isLoginInProgress})
       : super._();
 
   @override
@@ -156,10 +188,14 @@ class _$_AuthState extends _AuthState with DiagnosticableTreeMixin {
   final bool isUserCheckedFromAuthService;
   @override
   final bool isAnonymousLoginInProgress;
+  @override
+  final bool isSignupInProgress;
+  @override
+  final bool isLoginInProgress;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AuthState(userModel: $userModel, isUserCheckedFromAuthService: $isUserCheckedFromAuthService, isAnonymousLoginInProgress: $isAnonymousLoginInProgress)';
+    return 'AuthState(userModel: $userModel, isUserCheckedFromAuthService: $isUserCheckedFromAuthService, isAnonymousLoginInProgress: $isAnonymousLoginInProgress, isSignupInProgress: $isSignupInProgress, isLoginInProgress: $isLoginInProgress)';
   }
 
   @override
@@ -171,7 +207,9 @@ class _$_AuthState extends _AuthState with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty(
           'isUserCheckedFromAuthService', isUserCheckedFromAuthService))
       ..add(DiagnosticsProperty(
-          'isAnonymousLoginInProgress', isAnonymousLoginInProgress));
+          'isAnonymousLoginInProgress', isAnonymousLoginInProgress))
+      ..add(DiagnosticsProperty('isSignupInProgress', isSignupInProgress))
+      ..add(DiagnosticsProperty('isLoginInProgress', isLoginInProgress));
   }
 
   @override
@@ -184,7 +222,11 @@ class _$_AuthState extends _AuthState with DiagnosticableTreeMixin {
                 other.isUserCheckedFromAuthService,
                 isUserCheckedFromAuthService) &&
             const DeepCollectionEquality().equals(
-                other.isAnonymousLoginInProgress, isAnonymousLoginInProgress));
+                other.isAnonymousLoginInProgress, isAnonymousLoginInProgress) &&
+            const DeepCollectionEquality()
+                .equals(other.isSignupInProgress, isSignupInProgress) &&
+            const DeepCollectionEquality()
+                .equals(other.isLoginInProgress, isLoginInProgress));
   }
 
   @override
@@ -192,7 +234,9 @@ class _$_AuthState extends _AuthState with DiagnosticableTreeMixin {
       runtimeType,
       const DeepCollectionEquality().hash(userModel),
       const DeepCollectionEquality().hash(isUserCheckedFromAuthService),
-      const DeepCollectionEquality().hash(isAnonymousLoginInProgress));
+      const DeepCollectionEquality().hash(isAnonymousLoginInProgress),
+      const DeepCollectionEquality().hash(isSignupInProgress),
+      const DeepCollectionEquality().hash(isLoginInProgress));
 
   @JsonKey(ignore: true)
   @override
@@ -204,7 +248,9 @@ abstract class _AuthState extends AuthState {
   const factory _AuthState(
       {required AuthUserModel userModel,
       required bool isUserCheckedFromAuthService,
-      required bool isAnonymousLoginInProgress}) = _$_AuthState;
+      required bool isAnonymousLoginInProgress,
+      required bool isSignupInProgress,
+      required bool isLoginInProgress}) = _$_AuthState;
   const _AuthState._() : super._();
 
   @override
@@ -213,6 +259,10 @@ abstract class _AuthState extends AuthState {
   bool get isUserCheckedFromAuthService;
   @override
   bool get isAnonymousLoginInProgress;
+  @override
+  bool get isSignupInProgress;
+  @override
+  bool get isLoginInProgress;
   @override
   @JsonKey(ignore: true)
   _$AuthStateCopyWith<_AuthState> get copyWith =>

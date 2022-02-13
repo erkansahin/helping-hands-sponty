@@ -29,7 +29,7 @@ class _LandingPageState extends State<LandingPage> {
         if (isLoggedIn) {
           AutoRouter.of(context).replace(const HomeRoute());
         } else if (!isLoggedIn && isUserCheckedFromAuthService) {
-          AutoRouter.of(context).replace(const SignupRoute());
+          AutoRouter.of(context).replace(const LoginRoute());
         }
       });
     });
@@ -53,7 +53,7 @@ class _LandingPageState extends State<LandingPage> {
         if (isUserLoggedIn) {
           AutoRouter.of(context).replace(const HomeRoute());
         } else {
-          AutoRouter.of(context).replace(const SignupRoute());
+          AutoRouter.of(context).replace(const LoginRoute());
         }
       },
       child: const Scaffold(

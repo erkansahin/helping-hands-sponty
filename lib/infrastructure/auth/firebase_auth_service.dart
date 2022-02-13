@@ -45,6 +45,26 @@ class FirebaseAuthFacade implements IAuthService {
   }
 
   @override
+  Future<Option<AuthUserModel>> getDatabaseUserWithPhoneNumber(
+      {required String phoneNumber}) async {
+    try {
+      final query = await _firestore.authUserCollection
+          .where("phoneNumber", isEqualTo: phoneNumber)
+          .get();
+      if (query.docs.isNotEmpty && query.docs[0].exists) {
+        final doc = query.docs[0];
+        return some(AuthUserModelDto.fromFirestore(doc).toDomain());
+      } else {
+        print("authh getDatabaseUserWithPhoneNumber DOES NOT EXIST");
+        return none();
+      }
+    } catch (e) {
+      log("authh Error $e on getDatabaseUserWithPhoneNumber");
+      return none();
+    }
+  }
+
+  @override
   Future<Option<Unit>> signUpUser({
     required String name,
     required BloodType bloodType,
@@ -138,6 +158,4 @@ class FirebaseAuthFacade implements IAuthService {
       return user;
     });
   }
-
-  
 }

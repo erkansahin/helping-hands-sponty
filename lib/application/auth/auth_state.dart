@@ -6,6 +6,8 @@ class AuthState with _$AuthState {
     required AuthUserModel userModel,
     required bool isUserCheckedFromAuthService,
     required bool isAnonymousLoginInProgress,
+    required bool isSignupInProgress,
+    required bool isLoginInProgress,
   }) = _AuthState;
   const AuthState._();
 
@@ -13,6 +15,8 @@ class AuthState with _$AuthState {
         userModel: AuthUserModel.empty(),
         isUserCheckedFromAuthService: false,
         isAnonymousLoginInProgress: false,
+        isSignupInProgress: false,
+        isLoginInProgress: false,
       );
 
   bool get isLoggedIn => userModel.phoneNumber.isNotEmpty;
