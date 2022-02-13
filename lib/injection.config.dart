@@ -41,8 +41,9 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i6.FirebaseFirestore>(() => injectableModule.firestore);
   gh.lazySingleton<_i7.IAuthService>(() => _i8.FirebaseAuthFacade(
       get<_i5.FirebaseAuth>(), get<_i6.FirebaseFirestore>()));
-  gh.lazySingleton<_i9.IDangerReportingService>(
-      () => _i10.DangerReportingService(get<_i6.FirebaseFirestore>()));
+  gh.lazySingleton<_i9.IDangerReportingService>(() =>
+      _i10.DangerReportingService(
+          get<_i6.FirebaseFirestore>(), get<_i5.FirebaseAuth>()));
   gh.lazySingleton<_i11.IGeolocator>(() => _i12.GeoLocatorService());
   gh.lazySingleton<_i13.IHelpService>(
       () => _i14.HelpService(get<_i6.FirebaseFirestore>()));
