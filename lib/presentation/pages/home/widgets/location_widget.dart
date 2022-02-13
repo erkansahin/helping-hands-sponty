@@ -6,10 +6,11 @@ class LocationWidget extends StatelessWidget {
   const LocationWidget({
     Key? key,
     required this.onPressed,
+    required this.showWarning,
   }) : super(key: key);
 
   final Function onPressed;
-
+  final bool showWarning;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -38,7 +39,7 @@ class LocationWidget extends StatelessWidget {
             SvgPicture.asset(
               "assets/svg/mylocation.svg",
             ),
-            if (true)
+            if (showWarning)
               Positioned(
                 right: -8,
                 bottom: -8,

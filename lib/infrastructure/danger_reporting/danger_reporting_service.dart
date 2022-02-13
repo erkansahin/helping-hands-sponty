@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:helping_hands_sponty/domain/auth/auth_user_model.dart';
 import 'package:injectable/injectable.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 import '../../domain/danger_reporting/i_danger_reporting_service.dart';
 import '../auth/dto/auth_user_model_dto.dart';
@@ -10,16 +11,22 @@ import '../core/json_converters.dart';
 
 @LazySingleton(as: IDangerReportingService)
 class DangerReportingService implements IDangerReportingService {
+  final auth.FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firestore;
 
-  DangerReportingService(this._firestore);
+  DangerReportingService(
+    this._firestore,
+    this._firebaseAuth,
+  );
   @override
   Future<Option<Unit>> markUserInDanger({
     required String dangerDescription,
     required String userId,
   }) async {
     try {
-      await _firestore.authUserCollection.doc(userId).update({
+      await _firestore.authUserCollection
+          .doc(_firebaseAuth.currentUser!.uid)
+          .update({
         "dangerDescription": dangerDescription,
         "isInDanger": true,
         "inDangerDate": sendDateTimeToJson(DateTime.now())
@@ -36,7 +43,9 @@ class DangerReportingService implements IDangerReportingService {
     required String userId,
   }) async {
     try {
-      await _firestore.authUserCollection.doc(userId).update({
+      await _firestore.authUserCollection
+          .doc(_firebaseAuth.currentUser!.uid)
+          .update({
         "dangerDescription": "",
         "isInDanger": false,
         "inDangerDate":
@@ -44,6 +53,7 @@ class DangerReportingService implements IDangerReportingService {
       });
       return some(unit);
     } catch (e) {
+      print("markUserNotInDanger error: $e");
       return none();
     }
   }

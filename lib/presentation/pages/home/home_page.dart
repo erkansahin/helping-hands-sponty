@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:helping_hands_sponty/application/auth/auth_cubit.dart';
+import 'package:helping_hands_sponty/application/location/location_cubit.dart';
 import 'package:helping_hands_sponty/application/map/map_cubit.dart';
 import 'package:helping_hands_sponty/domain/auth/auth_user_model.dart';
 import 'package:helping_hands_sponty/presentation/pages/home/widgets/alert_animation_widget.dart';
@@ -215,53 +216,60 @@ class _HomePageState extends State<HomePage> {
                 return state.userModel;
               },
               builder: (context, authUserModel) {
-                return BlocBuilder<MapCubit, MapState>(
-                  builder: (context, mapState) {
-                    return FlutterMap(
-                      mapController: mapController,
-                      options: MapOptions(
-                        interactiveFlags:
-                            InteractiveFlag.all & ~InteractiveFlag.rotate,
-                        center: LatLng(40.980222, 29.036929),
-                        zoom: 12,
-                        onTap: (tapPosition, latlng) {
-                          onPolygon(tapPosition.global, latlng);
-                        },
-                      ),
-                      layers: [
-                        TileLayerOptions(
-                          urlTemplate: "https://api.mapbox.com/styles/v1/"
-                              "{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
-                          additionalOptions: {
-                            'accessToken': mapboxAccessToken,
-                            'id': mapboxId,
-                          },
-                        ),
-                        PolygonLayerOptions(
-                          polygonCulling: false,
-                          polygons: disasterGatheringSpots
-                              .map((e) => e.polygon)
-                              .toList(),
-                        ),
-                        MarkerLayerOptions(
-                          markers: [
-                            Marker(
-                              width: 80.0,
-                              height: 80.0,
-                              point: LatLng(41.028526, 29.020718),
-                              builder: (ctx) => MyPinMarker(
-                                onPressed: () {
-                                  debugPrint("pressed on my pin!");
-                                },
-                              ),
+                return BlocBuilder<LocationCubit, LocationState>(
+                  builder: (context, locationState) {
+                    return BlocBuilder<MapCubit, MapState>(
+                      builder: (context, mapState) {
+                        return FlutterMap(
+                          mapController: mapController,
+                          options: MapOptions(
+                            interactiveFlags:
+                                InteractiveFlag.all & ~InteractiveFlag.rotate,
+                            center: LatLng(40.980222, 29.036929),
+                            zoom: 12,
+                            onTap: (tapPosition, latlng) {
+                              onPolygon(tapPosition.global, latlng);
+                            },
+                          ),
+                          layers: [
+                            TileLayerOptions(
+                              urlTemplate: "https://api.mapbox.com/styles/v1/"
+                                  "{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+                              additionalOptions: {
+                                'accessToken': mapboxAccessToken,
+                                'id': mapboxId,
+                              },
                             ),
-                            ...generateDangerMarkers(
-                              dangeredUsers: [],
-                              authUserModel: authUserModel,
+                            PolygonLayerOptions(
+                              polygonCulling: false,
+                              polygons: disasterGatheringSpots
+                                  .map((e) => e.polygon)
+                                  .toList(),
+                            ),
+                            MarkerLayerOptions(
+                              markers: [
+                                if (locationState.isExactLocationAvailable)
+                                  Marker(
+                                    width: 80.0,
+                                    height: 80.0,
+                                    point: LatLng(
+                                        locationState.exactLocation.latitude,
+                                        locationState.exactLocation.longitude),
+                                    builder: (ctx) => MyPinMarker(
+                                      onPressed: () {
+                                        debugPrint("pressed on my pin!");
+                                      },
+                                    ),
+                                  ),
+                                ...generateDangerMarkers(
+                                  dangeredUsers: mapState.usersUnderDanger,
+                                  authUserModel: authUserModel,
+                                ),
+                              ],
                             ),
                           ],
-                        ),
-                      ],
+                        );
+                      },
                     );
                   },
                 );
@@ -351,9 +359,27 @@ class _HomePageState extends State<HomePage> {
               bottom: 140,
               // width: 300,
               // height: 300,
-              child: LocationWidget(
-                onPressed: () {
-                  debugPrint("Location widget pressed!");
+              child: BlocBuilder<LocationCubit, LocationState>(
+                builder: (context, locationState) {
+                  return LocationWidget(
+                    showWarning:
+                        !locationState.isLocationPermissionAndServicesAvailable,
+                    onPressed: () {
+                      debugPrint("Location widget pressed!");
+                      if (!locationState.isLocationPermissionGranted) {
+                        context
+                            .read<LocationCubit>()
+                            .requestLocationPermission();
+                      } else if (!locationState.isLocationServicesEnabled) {
+                        context.read<LocationCubit>().openAppSettings();
+                      } else if (locationState.isExactLocationAvailable) {
+                        mapController.move(
+                            LatLng(locationState.exactLocation.latitude,
+                                locationState.exactLocation.longitude),
+                            10);
+                      }
+                    },
+                  );
                 },
               ),
             ),
