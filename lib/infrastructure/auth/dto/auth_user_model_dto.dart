@@ -3,8 +3,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:helping_hands_sponty/domain/auth/blood_type.dart';
 
 import '../../../domain/auth/auth_user_model.dart';
+
 import '../../core/json_converters.dart';
 import 'location_model_dto.dart';
+
 
 part 'auth_user_model_dto.freezed.dart';
 part 'auth_user_model_dto.g.dart';

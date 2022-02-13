@@ -10,6 +10,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../domain/auth/auth_failure.dart';
 import '../../domain/auth/auth_user_model.dart';
+import '../../domain/auth/blood_type.dart';
 import '../../domain/auth/i_auth_service.dart';
 
 import '../core/firestore_extension.dart';
@@ -41,6 +42,31 @@ class FirebaseAuthFacade implements IAuthService {
       log("authh Error $e on getDatabaseUser");
       return none();
     }
+  }
+
+  @override
+  Future<Option<Unit>> signUpUser({
+    required String name,
+    required BloodType bloodType,
+    required String phoneNumber,
+    required String emergencyContactName,
+    required String emergencyContactNumber,
+  }) async {
+    try {
+      await _firestore.authUserCollection
+          .doc(_firebaseAuth.currentUser!.uid)
+          .update({
+        "name": name,
+        "bloodType": bloodType.name,
+        "phoneNumber": phoneNumber,
+        "emergencyContactName": emergencyContactName,
+        "emergencyContactNumber": emergencyContactNumber,
+      });
+      return some(unit);
+    } catch (e) {
+      return none();
+    }
+    //
   }
 
   @override
