@@ -47,3 +47,5 @@ app.*.map.json
 
 lib/infrastructure/core/private.dart
 lib/presentation/routes/router.gr.dart
+lib/injection.config.dart
+lib/presentation/routes/router.gr.dart
