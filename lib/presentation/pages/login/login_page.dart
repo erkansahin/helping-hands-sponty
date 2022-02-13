@@ -77,6 +77,12 @@ class _LoginPageState extends State<LoginPage> {
                           controller: phoneController,
                           keyboardType: TextInputType.phone,
                           textInputAction: TextInputAction.done,
+                          validator: (val) {
+                            if (val != null && val.isEmpty) {
+                              return "Cannot be empty";
+                            }
+                            return null;
+                          },
                         ),
                       ],
                     ),
@@ -108,7 +114,14 @@ class _LoginPageState extends State<LoginPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12)),
                               padding: const EdgeInsets.symmetric(vertical: 16),
-                              onPressed: () async {},
+                              onPressed: () async {
+                                if (_formKey.currentState != null &&
+                                    _formKey.currentState!.validate()) {
+                                  await context.read<AuthCubit>().login(
+                                        phoneController.text,
+                                      );
+                                }
+                              },
                               child: const Text(
                                 "Login",
                                 style: TextStyle(

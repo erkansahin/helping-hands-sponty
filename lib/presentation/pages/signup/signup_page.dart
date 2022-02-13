@@ -60,7 +60,6 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("edit ${widget.edit}");
     return Scaffold(
       body: BlocListener<AuthCubit, AuthState>(
         listenWhen: ((previous, current) =>
