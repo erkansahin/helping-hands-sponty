@@ -16,8 +16,8 @@ class DangeredUserPopup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      width: 196,
-      height: 70.0,
+      width: 176,
+      height: 50.0,
       decoration: BoxDecoration(
         color: const Color(0x30F985DF),
         borderRadius: BorderRadius.circular(10),
@@ -53,19 +53,19 @@ class DangeredUserPopup extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                // Text(
-                //   "capacity:${disasterGatheringSpot.capacity.toString()}",
-                //   textAlign: TextAlign.start,
-                //   maxLines: 1,
-                //   softWrap: false,
-                //   overflow: TextOverflow.ellipsis,
-                //   style: GoogleFonts.quicksand(
-                //     color: const Color(0xFFFFFFFF),
-                //     fontSize: 12,
-                //     // letterSpacing: -0.41,
-                //     fontWeight: FontWeight.w700,
-                //   ),
-                // ),
+                Text(
+                  userModel.bloodTypeString,
+                  textAlign: TextAlign.start,
+                  maxLines: 1,
+                  softWrap: false,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.quicksand(
+                    color: const Color(0xFFFFFFFF),
+                    fontSize: 12,
+                    // letterSpacing: -0.41,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
                 // Text(
                 //   "fullness:${disasterGatheringSpot.fullness.toStringAsFixed(1)}",
                 //   textAlign: TextAlign.start,

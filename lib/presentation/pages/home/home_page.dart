@@ -7,6 +7,7 @@ import 'package:helping_hands_sponty/application/map/map_cubit.dart';
 import 'package:helping_hands_sponty/application/permission/permission_cubit.dart';
 import 'package:helping_hands_sponty/domain/auth/auth_user_model.dart';
 import 'package:helping_hands_sponty/presentation/pages/home/widgets/alert_animation_widget.dart';
+import 'package:helping_hands_sponty/presentation/pages/home/widgets/dangered_popup.dart';
 import 'package:helping_hands_sponty/presentation/pages/home/widgets/location_widget.dart';
 import 'package:helping_hands_sponty/presentation/pages/home/widgets/my_pin_marker.dart';
 import '../../routes/router.gr.dart';
@@ -165,14 +166,16 @@ class _HomePageState extends State<HomePage> {
             userModel: dangeredUser,
             onPressed: () {
               debugPrint("pressed on dangered user: ${dangeredUser.name}");
-              // BotToast.showAttachedWidget(
-              //   attachedBuilder: (_) => DisasterGatheringPopup(
-              //     disasterGatheringSpot: disasterGatheringSpot,
-              //   ),
-              //   duration: const Duration(seconds: 5),
-              //   target: Offset(tapPosition.dx, tapPosition.dy - 30),
-              //   preferDirection: PreferDirection.topCenter,
-              // );
+              Size size = MediaQuery.of(ctx).size;
+              Offset middle = Offset(size.width / 2.0, size.height / 2.0);
+              BotToast.showAttachedWidget(
+                attachedBuilder: (_) => DangeredUserPopup(
+                  userModel: dangeredUser,
+                ),
+                duration: const Duration(seconds: 5),
+                target: Offset(middle.dx, middle.dy - 30),
+                preferDirection: PreferDirection.topCenter,
+              );
             },
           ),
         );
