@@ -10,14 +10,15 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
 import 'application/app_life_cycle/app_life_cycle_cubit.dart' as _i3;
-import 'application/auth/auth_cubit.dart' as _i14;
-import 'application/location/location_cubit.dart' as _i15;
+import 'application/auth/auth_cubit.dart' as _i15;
+import 'application/location/location_cubit.dart' as _i16;
 import 'application/permission/permission_cubit.dart' as _i13;
+import 'application/sign_up/sign_up_cubit.dart' as _i14;
 import 'domain/auth/i_auth_service.dart' as _i7;
 import 'domain/geolocator/i_geolocator.dart' as _i9;
 import 'domain/permission/i_permission_handler.dart' as _i11;
 import 'infrastructure/auth/firebase_auth_service.dart' as _i8;
-import 'infrastructure/core/injectable_module.dart' as _i16;
+import 'infrastructure/core/injectable_module.dart' as _i17;
 import 'infrastructure/geolocator/geolocator_service.dart' as _i10;
 import 'infrastructure/permission/permission_handler_service.dart' as _i12;
 import 'presentation/routes/router.gr.dart'
@@ -39,9 +40,10 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i11.IPermissionHandler>(() => _i12.PermissionHandlerRepository());
   gh.lazySingleton<_i13.PermissionCubit>(() => _i13.PermissionCubit(
       get<_i11.IPermissionHandler>(), get<_i9.IGeolocator>()));
-  gh.lazySingleton<_i14.AuthCubit>(
-      () => _i14.AuthCubit(get<_i7.IAuthService>()));
-  gh.lazySingleton<_i15.LocationCubit>(() => _i15.LocationCubit(
+  gh.factory<_i14.SignUpCubit>(() => _i14.SignUpCubit(get<_i7.IAuthService>()));
+  gh.lazySingleton<_i15.AuthCubit>(
+      () => _i15.AuthCubit(get<_i7.IAuthService>()));
+  gh.lazySingleton<_i16.LocationCubit>(() => _i16.LocationCubit(
       get<_i13.PermissionCubit>(),
       get<_i3.AppLifeCycleCubit>(),
       get<_i9.IGeolocator>(),
@@ -49,4 +51,4 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   return get;
 }
 
-class _$InjectableModule extends _i16.InjectableModule {}
+class _$InjectableModule extends _i17.InjectableModule {}
