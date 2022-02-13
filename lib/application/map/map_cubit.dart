@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:helping_hands_sponty/domain/auth/auth_user_model.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/danger_reporting/i_danger_reporting_service.dart';
@@ -15,6 +16,7 @@ class MapCubit extends Cubit<MapState> {
   final IDangerReportingService _dangerReportingService;
   final AuthCubit _authCubit;
   StreamSubscription<String>? _authUserIdSubscription;
+
   MapCubit(this._dangerReportingService, this._authCubit)
       : super(MapState.initial()) {
     emit(state.copyWith(
@@ -25,6 +27,9 @@ class MapCubit extends Cubit<MapState> {
       emit(state.copyWith(
         userId: userId,
       ));
+    });
+    _dangerReportingService.usersUnderDangerStream.listen((users) {
+      emit(state.copyWith(usersUnderDanger: users));
     });
   }
   @override
