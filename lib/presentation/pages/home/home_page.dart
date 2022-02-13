@@ -3,6 +3,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:helping_hands_sponty/application/auth/auth_cubit.dart';
 import 'package:helping_hands_sponty/presentation/pages/home/widgets/alert_animation_widget.dart';
+import 'package:helping_hands_sponty/presentation/pages/home/widgets/location_widget.dart';
 import '../../routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,6 +14,7 @@ import 'package:geodesy/geodesy.dart';
 
 import 'widgets/danger_button.dart';
 import 'widgets/danger_label.dart';
+import 'widgets/disaster_gathering_widget.dart';
 import 'widgets/user_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -145,17 +147,13 @@ class _HomePageState extends State<HomePage> {
         debugPrint("${disasterGatheringSpot.name} $tapPosition");
 
         BotToast.showAttachedWidget(
-            attachedBuilder: (_) => const Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.favorite,
-                      color: Colors.redAccent,
-                    ),
-                  ),
-                ),
-            duration: const Duration(seconds: 2),
-            target: const Offset(520, 520));
+          attachedBuilder: (_) => DisasterGatheringPopup(
+            disasterGatheringSpot: disasterGatheringSpot,
+          ),
+          duration: const Duration(seconds: 5),
+          target: Offset(tapPosition.dx, tapPosition.dy - 30),
+          preferDirection: PreferDirection.topCenter,
+        );
         break;
       }
     }
@@ -240,17 +238,25 @@ class _HomePageState extends State<HomePage> {
                     isInDanger ? const DangerLabel() : const SizedBox.shrink(),
               ),
             ),
+            // Positioned(
+            //   // left: 40,
+            //   // right: 40,
+            //   bottom: 175,
+            //   width: 300,
+            //   height: 300,
+            //   child: AnimatedOpacity(
+            //     duration: const Duration(milliseconds: 250),
+            //     opacity: isInDanger ? 1.0 : 0.0,
+            //     child: const AlertAnimation(),
+            //   ),
+            // ),
             Positioned(
               // left: 40,
-              // right: 40,
-              bottom: 175,
-              width: 300,
-              height: 300,
-              child: AnimatedOpacity(
-                duration: const Duration(milliseconds: 250),
-                opacity: isInDanger ? 1.0 : 0.0,
-                child: const AlertAnimation(),
-              ),
+              right: 22,
+              bottom: 140,
+              // width: 300,
+              // height: 300,
+              child: LocationWidget(),
             ),
           ],
         ),
