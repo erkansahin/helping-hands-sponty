@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:helping_hands_sponty/application/auth/auth_cubit.dart';
+import 'package:helping_hands_sponty/presentation/pages/home/widgets/alert_animation_widget.dart';
 import '../../routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -141,6 +143,19 @@ class _HomePageState extends State<HomePage> {
           point, disasterGatheringSpot.polygon.points);
       if (isGeoPointInPolygon == true) {
         debugPrint("${disasterGatheringSpot.name} $tapPosition");
+
+        BotToast.showAttachedWidget(
+            attachedBuilder: (_) => const Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.favorite,
+                      color: Colors.redAccent,
+                    ),
+                  ),
+                ),
+            duration: const Duration(seconds: 2),
+            target: const Offset(520, 520));
         break;
       }
     }
@@ -223,6 +238,18 @@ class _HomePageState extends State<HomePage> {
                 },
                 child:
                     isInDanger ? const DangerLabel() : const SizedBox.shrink(),
+              ),
+            ),
+            Positioned(
+              // left: 40,
+              // right: 40,
+              bottom: 175,
+              width: 300,
+              height: 300,
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 250),
+                opacity: isInDanger ? 1.0 : 0.0,
+                child: const AlertAnimation(),
               ),
             ),
           ],
