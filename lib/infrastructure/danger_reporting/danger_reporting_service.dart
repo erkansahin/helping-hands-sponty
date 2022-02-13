@@ -24,6 +24,7 @@ class DangerReportingService implements IDangerReportingService {
       });
       return some(unit);
     } catch (e) {
+      print("markUserInDanger error: $e");
       return none();
     }
   }
