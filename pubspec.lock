@@ -403,6 +403,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.0"
+  get_ip_address:
+    dependency: "direct main"
+    description:
+      name: get_ip_address
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.5"
   get_it:
     dependency: "direct main"
     description:

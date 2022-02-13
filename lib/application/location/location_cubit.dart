@@ -1,14 +1,17 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:helping_hands_sponty/domain/auth/i_auth_service.dart';
 import 'package:helping_hands_sponty/domain/geolocator/location_model.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../domain/geolocator/i_geolocator.dart';
 import '../../domain/permission/i_permission_handler.dart';
+import '../../infrastructure/auth/dto/location_model_dto.dart';
 import '../../injection.dart';
 import '../app_life_cycle/app_life_cycle_cubit.dart';
 import '../permission/permission_cubit.dart';
@@ -17,7 +20,7 @@ part 'location_cubit.freezed.dart';
 part 'location_state.dart';
 
 @lazySingleton
-class LocationCubit extends Cubit<LocationState> {
+class LocationCubit extends HydratedCubit<LocationState> {
   StreamSubscription<AppLifeCycleState>? _applifecycleListenerSubscription;
   StreamSubscription<PermissionState>? _permissionStateSubscription;
   StreamSubscription<Iterable<LocationModel>>? _exactLocationSubscription;
@@ -70,6 +73,13 @@ class LocationCubit extends Cubit<LocationState> {
       );
 
       _startLocationSubscriptionIfPossible();
+    }
+    if (state.exactLocation == LocationModel.empty() && !kDebugMode) {
+      _geolocator.getLocationFromIP().then((location) {
+        if (state.exactLocation == LocationModel.empty()) {
+          emit(state.copyWith(exactLocation: location));
+        }
+      });
     }
   }
 
@@ -144,5 +154,17 @@ class LocationCubit extends Cubit<LocationState> {
         emit(state.copyWith(exactLocation: deviceLocation));
       });
     }
+  }
+
+  @override
+  LocationState? fromJson(Map<String, dynamic> json) {
+    return state.copyWith(exactLocation: json["exactLocation"]);
+  }
+
+  @override
+  Map<String, dynamic>? toJson(LocationState state) {
+    return {
+      "exactLocation": LocationModelDto.fromDomain(state.exactLocation),
+    };
   }
 }
