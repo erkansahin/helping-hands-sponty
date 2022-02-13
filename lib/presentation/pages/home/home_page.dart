@@ -2,8 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:helping_hands_sponty/application/auth/auth_cubit.dart';
+import 'package:helping_hands_sponty/application/map/map_cubit.dart';
 import 'package:helping_hands_sponty/presentation/pages/home/widgets/alert_animation_widget.dart';
 import 'package:helping_hands_sponty/presentation/pages/home/widgets/location_widget.dart';
+import 'package:helping_hands_sponty/presentation/pages/home/widgets/my_pin_marker.dart';
 import '../../routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -125,13 +127,13 @@ class _HomePageState extends State<HomePage> {
 
   late final Polygon polygonKosuyolu;
 
-  bool isInDanger = false;
+  // bool isInDanger = false;
 
-  void toggleDanger() {
-    setState(() {
-      isInDanger = !isInDanger;
-    });
-  }
+  // void toggleDanger() {
+  //   setState(() {
+  //     isInDanger = !isInDanger;
+  //   });
+  // }
 
   @override
   void initState() {
@@ -191,6 +193,20 @@ class _HomePageState extends State<HomePage> {
                   polygons:
                       disasterGatheringSpots.map((e) => e.polygon).toList(),
                 ),
+                MarkerLayerOptions(
+                  markers: [
+                    Marker(
+                      width: 80.0,
+                      height: 80.0,
+                      point: LatLng(41.028526, 29.020718),
+                      builder: (ctx) => MyPinMarker(
+                        onPressed: () {
+                          debugPrint("pressed on my pin!");
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
             Positioned(
@@ -208,11 +224,24 @@ class _HomePageState extends State<HomePage> {
             ),
             Positioned(
               bottom: 30.0,
-              child: DangerButton(
-                isInDanger: isInDanger,
-                onPressed: () {
-                  debugPrint("pressed on button!");
-                  toggleDanger();
+              child: BlocSelector<AuthCubit, AuthState, bool>(
+                selector: (state) {
+                  return state.isInDanger;
+                },
+                builder: (context, isInDanger) {
+                  return DangerButton(
+                    isInDanger: isInDanger,
+                    onPressed: () {
+                      debugPrint("pressed on danger/safe button!");
+                      if (isInDanger) {
+                        context.read<MapCubit>().markUserNotInDanger();
+                      } else {
+                        context
+                            .read<MapCubit>()
+                            .markUserInDanger(dangerDescription: "help me!");
+                      }
+                    },
+                  );
                 },
               ),
             ),
@@ -220,22 +249,30 @@ class _HomePageState extends State<HomePage> {
               left: 40,
               right: 40,
               top: 175,
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 250),
-                reverseDuration: const Duration(milliseconds: 250),
-                transitionBuilder: (child, animation) {
-                  return FadeTransition(
-                    opacity: CurvedAnimation(
-                        parent: animation, curve: Curves.easeIn),
-                    child: ScaleTransition(
-                      scale: CurvedAnimation(
-                          parent: animation, curve: Curves.easeOut),
-                      child: child,
-                    ),
+              child: BlocSelector<AuthCubit, AuthState, bool>(
+                selector: (state) {
+                  return state.isInDanger;
+                },
+                builder: (context, isInDanger) {
+                  return AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 250),
+                    reverseDuration: const Duration(milliseconds: 250),
+                    transitionBuilder: (child, animation) {
+                      return FadeTransition(
+                        opacity: CurvedAnimation(
+                            parent: animation, curve: Curves.easeIn),
+                        child: ScaleTransition(
+                          scale: CurvedAnimation(
+                              parent: animation, curve: Curves.easeOut),
+                          child: child,
+                        ),
+                      );
+                    },
+                    child: isInDanger
+                        ? const DangerLabel()
+                        : const SizedBox.shrink(),
                   );
                 },
-                child:
-                    isInDanger ? const DangerLabel() : const SizedBox.shrink(),
               ),
             ),
             // Positioned(
@@ -256,7 +293,11 @@ class _HomePageState extends State<HomePage> {
               bottom: 140,
               // width: 300,
               // height: 300,
-              child: LocationWidget(),
+              child: LocationWidget(
+                onPressed: () {
+                  debugPrint("Location widget pressed!");
+                },
+              ),
             ),
           ],
         ),

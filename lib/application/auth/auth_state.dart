@@ -20,4 +20,5 @@ class AuthState with _$AuthState {
       );
 
   bool get isLoggedIn => userModel.phoneNumber.isNotEmpty;
+  bool get isInDanger => userModel.isInDanger;
 }

@@ -34,6 +34,7 @@ class MapCubit extends Cubit<MapState> {
   }
 
   Future<void> markUserInDanger({required String dangerDescription}) async {
+    print("markUserInDanger userid: ${state.userId}");
     emit(state.copyWith(
       isMarkingDangerStateInProgress: true,
       isMarkingDangerStateFailed: false,
