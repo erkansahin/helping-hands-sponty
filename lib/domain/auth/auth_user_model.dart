@@ -35,4 +35,6 @@ class AuthUserModel with _$AuthUserModel {
         emergencyContactName: '',
         inDangerDate: DateTime.fromMillisecondsSinceEpoch(0),
       );
+
+  String get bloodTypeString => bloodType.toCustomString();
 }
