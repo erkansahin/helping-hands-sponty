@@ -10,10 +10,13 @@ abstract class IAuthService {
 
   Stream<AuthUserModel> databaseUserChanges({required String userId});
 
-
   Future<Option<Unit>> saveUserToDatabase({
     required AuthUserModel userModel,
   });
+
+  Future<Option<AuthUserModel>> getDatabaseUserWithPhoneNumber(
+      {required String phoneNumber});
+
   Future<Option<Unit>> signUpUser({
     required String name,
     required BloodType bloodType,

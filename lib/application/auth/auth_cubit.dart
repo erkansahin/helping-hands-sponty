@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:helping_hands_sponty/domain/auth/auth_user_model.dart';
 import 'package:injectable/injectable.dart';
@@ -48,6 +49,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> _listenAuthStateChangesStream(AuthUserModel authUser) async {
+    print("authUser $authUser");
     if (authUser == AuthUserModel.empty()) {
       emit(state.copyWith(
         userModel: AuthUserModel.empty(),
@@ -58,6 +60,8 @@ class AuthCubit extends Cubit<AuthState> {
             isAnonymousLoginInProgress: true,
             isUserCheckedFromAuthService: true));
 
+        final userDoc = await _authService.getDatabaseUser(id: authUser.id);
+
         await _authService.signInAnonymously();
 
         emit(state.copyWith(
@@ -65,13 +69,16 @@ class AuthCubit extends Cubit<AuthState> {
             isUserCheckedFromAuthService: true));
       }
     } else {
-      await _authService.saveUserToDatabase(userModel: authUser);
-      final updatedDatabaseUserOption =
+      final dbUserOption = await _authService.getDatabaseUser(id: authUser.id);
+      dbUserOption.match(
+        (dbUser) async {
+          if (dbUser.name == "") {
+            await _authService.saveUserToDatabase(
+                userModel: AuthUserModel.empty());
+          }
           await _authService.getDatabaseUser(id: authUser.id);
-      updatedDatabaseUserOption.match(
-        (updatedDBUser) {
           emit(state.copyWith(
-              userModel: updatedDBUser, isUserCheckedFromAuthService: true));
+              userModel: dbUser, isUserCheckedFromAuthService: true));
         },
         () {
           log("authhhhh no db user is found ${authUser.id}");
@@ -83,5 +90,23 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> signOut() async {
     await _authService.signOut();
+  }
+
+  Future<void> signUp(AuthUserModel userModel) async {
+    emit(state.copyWith(isSignupInProgress: true));
+    await _authService.saveUserToDatabase(userModel: userModel);
+    emit(state.copyWith(isSignupInProgress: false, userModel: userModel));
+  }
+
+  Future<void> login(String phoneNumber) async {
+    emit(state.copyWith(isLoginInProgress: true));
+    final userOption = await _authService.getDatabaseUserWithPhoneNumber(
+        phoneNumber: phoneNumber);
+    emit(state.copyWith(isLoginInProgress: false));
+    userOption.match((t) {
+      emit(state.copyWith(userModel: t));
+    }, () {
+      log("authhhhh no db user is found $phoneNumber");
+    });
   }
 }
