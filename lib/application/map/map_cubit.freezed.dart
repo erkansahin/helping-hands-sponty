@@ -19,10 +19,12 @@ class _$MapStateTearOff {
   const _$MapStateTearOff();
 
   _MapState call(
-      {required bool isMarkingDangerStateInProgress,
+      {required List<AuthUserModel> usersUnderDanger,
+      required bool isMarkingDangerStateInProgress,
       required bool isMarkingDangerStateFailed,
       required String userId}) {
     return _MapState(
+      usersUnderDanger: usersUnderDanger,
       isMarkingDangerStateInProgress: isMarkingDangerStateInProgress,
       isMarkingDangerStateFailed: isMarkingDangerStateFailed,
       userId: userId,
@@ -35,6 +37,8 @@ const $MapState = _$MapStateTearOff();
 
 /// @nodoc
 mixin _$MapState {
+  List<AuthUserModel> get usersUnderDanger =>
+      throw _privateConstructorUsedError;
   bool get isMarkingDangerStateInProgress => throw _privateConstructorUsedError;
   bool get isMarkingDangerStateFailed => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
@@ -49,7 +53,8 @@ abstract class $MapStateCopyWith<$Res> {
   factory $MapStateCopyWith(MapState value, $Res Function(MapState) then) =
       _$MapStateCopyWithImpl<$Res>;
   $Res call(
-      {bool isMarkingDangerStateInProgress,
+      {List<AuthUserModel> usersUnderDanger,
+      bool isMarkingDangerStateInProgress,
       bool isMarkingDangerStateFailed,
       String userId});
 }
@@ -64,11 +69,16 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? usersUnderDanger = freezed,
     Object? isMarkingDangerStateInProgress = freezed,
     Object? isMarkingDangerStateFailed = freezed,
     Object? userId = freezed,
   }) {
     return _then(_value.copyWith(
+      usersUnderDanger: usersUnderDanger == freezed
+          ? _value.usersUnderDanger
+          : usersUnderDanger // ignore: cast_nullable_to_non_nullable
+              as List<AuthUserModel>,
       isMarkingDangerStateInProgress: isMarkingDangerStateInProgress == freezed
           ? _value.isMarkingDangerStateInProgress
           : isMarkingDangerStateInProgress // ignore: cast_nullable_to_non_nullable
@@ -91,7 +101,8 @@ abstract class _$MapStateCopyWith<$Res> implements $MapStateCopyWith<$Res> {
       __$MapStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {bool isMarkingDangerStateInProgress,
+      {List<AuthUserModel> usersUnderDanger,
+      bool isMarkingDangerStateInProgress,
       bool isMarkingDangerStateFailed,
       String userId});
 }
@@ -107,11 +118,16 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? usersUnderDanger = freezed,
     Object? isMarkingDangerStateInProgress = freezed,
     Object? isMarkingDangerStateFailed = freezed,
     Object? userId = freezed,
   }) {
     return _then(_MapState(
+      usersUnderDanger: usersUnderDanger == freezed
+          ? _value.usersUnderDanger
+          : usersUnderDanger // ignore: cast_nullable_to_non_nullable
+              as List<AuthUserModel>,
       isMarkingDangerStateInProgress: isMarkingDangerStateInProgress == freezed
           ? _value.isMarkingDangerStateInProgress
           : isMarkingDangerStateInProgress // ignore: cast_nullable_to_non_nullable
@@ -132,11 +148,14 @@ class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
 
 class _$_MapState extends _MapState {
   const _$_MapState(
-      {required this.isMarkingDangerStateInProgress,
+      {required this.usersUnderDanger,
+      required this.isMarkingDangerStateInProgress,
       required this.isMarkingDangerStateFailed,
       required this.userId})
       : super._();
 
+  @override
+  final List<AuthUserModel> usersUnderDanger;
   @override
   final bool isMarkingDangerStateInProgress;
   @override
@@ -146,7 +165,7 @@ class _$_MapState extends _MapState {
 
   @override
   String toString() {
-    return 'MapState(isMarkingDangerStateInProgress: $isMarkingDangerStateInProgress, isMarkingDangerStateFailed: $isMarkingDangerStateFailed, userId: $userId)';
+    return 'MapState(usersUnderDanger: $usersUnderDanger, isMarkingDangerStateInProgress: $isMarkingDangerStateInProgress, isMarkingDangerStateFailed: $isMarkingDangerStateFailed, userId: $userId)';
   }
 
   @override
@@ -154,6 +173,8 @@ class _$_MapState extends _MapState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _MapState &&
+            const DeepCollectionEquality()
+                .equals(other.usersUnderDanger, usersUnderDanger) &&
             const DeepCollectionEquality().equals(
                 other.isMarkingDangerStateInProgress,
                 isMarkingDangerStateInProgress) &&
@@ -165,6 +186,7 @@ class _$_MapState extends _MapState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(usersUnderDanger),
       const DeepCollectionEquality().hash(isMarkingDangerStateInProgress),
       const DeepCollectionEquality().hash(isMarkingDangerStateFailed),
       const DeepCollectionEquality().hash(userId));
@@ -177,11 +199,14 @@ class _$_MapState extends _MapState {
 
 abstract class _MapState extends MapState {
   const factory _MapState(
-      {required bool isMarkingDangerStateInProgress,
+      {required List<AuthUserModel> usersUnderDanger,
+      required bool isMarkingDangerStateInProgress,
       required bool isMarkingDangerStateFailed,
       required String userId}) = _$_MapState;
   const _MapState._() : super._();
 
+  @override
+  List<AuthUserModel> get usersUnderDanger;
   @override
   bool get isMarkingDangerStateInProgress;
   @override
