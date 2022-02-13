@@ -3,6 +3,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:helping_hands_sponty/application/auth/auth_cubit.dart';
 import 'package:helping_hands_sponty/application/map/map_cubit.dart';
+import 'package:helping_hands_sponty/domain/auth/auth_user_model.dart';
 import 'package:helping_hands_sponty/presentation/pages/home/widgets/alert_animation_widget.dart';
 import 'package:helping_hands_sponty/presentation/pages/home/widgets/location_widget.dart';
 import 'package:helping_hands_sponty/presentation/pages/home/widgets/my_pin_marker.dart';
@@ -16,6 +17,7 @@ import 'package:geodesy/geodesy.dart';
 
 import 'widgets/danger_button.dart';
 import 'widgets/danger_label.dart';
+import 'widgets/danger_pin_marker.dart';
 import 'widgets/disaster_gathering_widget.dart';
 import 'widgets/user_card.dart';
 
@@ -140,6 +142,45 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+  List<Marker> generateDangerMarkers({
+    required List<AuthUserModel> dangeredUsers,
+    required AuthUserModel authUserModel,
+  }) {
+    final List<Marker> _markers = [];
+    for (final AuthUserModel dangeredUser in dangeredUsers) {
+      if (dangeredUser.id != authUserModel.id) {
+        final LatLng dangeredUserLatLng =
+            LatLng(dangeredUser.latitude, dangeredUser.longitude);
+
+        const double anchorPos = 16;
+
+        final Marker marker = Marker(
+          width: 32,
+          height: 32,
+          anchorPos: AnchorPos.exactly(Anchor(anchorPos, anchorPos)),
+          point: dangeredUserLatLng,
+          builder: (ctx) => DangerPinMarker(
+            userModel: dangeredUser,
+            onPressed: () {
+              debugPrint("pressed on dangered user: ${dangeredUser.name}");
+              // BotToast.showAttachedWidget(
+              //   attachedBuilder: (_) => DisasterGatheringPopup(
+              //     disasterGatheringSpot: disasterGatheringSpot,
+              //   ),
+              //   duration: const Duration(seconds: 5),
+              //   target: Offset(tapPosition.dx, tapPosition.dy - 30),
+              //   preferDirection: PreferDirection.topCenter,
+              // );
+            },
+          ),
+        );
+        _markers.add(marker);
+      }
+    }
+
+    return _markers;
+  }
+
   void onPolygon(Offset tapPosition, LatLng point) {
     for (DisasterGatheringSpot disasterGatheringSpot
         in disasterGatheringSpots) {
@@ -169,45 +210,62 @@ class _HomePageState extends State<HomePage> {
         body: Stack(
           alignment: Alignment.center,
           children: [
-            FlutterMap(
-              mapController: mapController,
-              options: MapOptions(
-                interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate,
-                center: LatLng(40.980222, 29.036929),
-                zoom: 12,
-                onTap: (tapPosition, latlng) {
-                  onPolygon(tapPosition.global, latlng);
-                },
-              ),
-              layers: [
-                TileLayerOptions(
-                  urlTemplate: "https://api.mapbox.com/styles/v1/"
-                      "{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
-                  additionalOptions: {
-                    'accessToken': mapboxAccessToken,
-                    'id': mapboxId,
-                  },
-                ),
-                PolygonLayerOptions(
-                  polygonCulling: false,
-                  polygons:
-                      disasterGatheringSpots.map((e) => e.polygon).toList(),
-                ),
-                MarkerLayerOptions(
-                  markers: [
-                    Marker(
-                      width: 80.0,
-                      height: 80.0,
-                      point: LatLng(41.028526, 29.020718),
-                      builder: (ctx) => MyPinMarker(
-                        onPressed: () {
-                          debugPrint("pressed on my pin!");
+            BlocSelector<AuthCubit, AuthState, AuthUserModel>(
+              selector: (state) {
+                return state.userModel;
+              },
+              builder: (context, authUserModel) {
+                return BlocBuilder<MapCubit, MapState>(
+                  builder: (context, mapState) {
+                    return FlutterMap(
+                      mapController: mapController,
+                      options: MapOptions(
+                        interactiveFlags:
+                            InteractiveFlag.all & ~InteractiveFlag.rotate,
+                        center: LatLng(40.980222, 29.036929),
+                        zoom: 12,
+                        onTap: (tapPosition, latlng) {
+                          onPolygon(tapPosition.global, latlng);
                         },
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      layers: [
+                        TileLayerOptions(
+                          urlTemplate: "https://api.mapbox.com/styles/v1/"
+                              "{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+                          additionalOptions: {
+                            'accessToken': mapboxAccessToken,
+                            'id': mapboxId,
+                          },
+                        ),
+                        PolygonLayerOptions(
+                          polygonCulling: false,
+                          polygons: disasterGatheringSpots
+                              .map((e) => e.polygon)
+                              .toList(),
+                        ),
+                        MarkerLayerOptions(
+                          markers: [
+                            Marker(
+                              width: 80.0,
+                              height: 80.0,
+                              point: LatLng(41.028526, 29.020718),
+                              builder: (ctx) => MyPinMarker(
+                                onPressed: () {
+                                  debugPrint("pressed on my pin!");
+                                },
+                              ),
+                            ),
+                            ...generateDangerMarkers(
+                              dangeredUsers: [],
+                              authUserModel: authUserModel,
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
             ),
             Positioned(
               top: 65,
