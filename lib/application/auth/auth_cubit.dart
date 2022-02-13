@@ -54,11 +54,15 @@ class AuthCubit extends Cubit<AuthState> {
         isUserCheckedFromAuthService: true,
       ));
       if (!state.isAnonymousLoginInProgress) {
-        emit(state.copyWith(isAnonymousLoginInProgress: true));
+        emit(state.copyWith(
+            isAnonymousLoginInProgress: true,
+            isUserCheckedFromAuthService: true));
 
         await _authService.signInAnonymously();
 
-        emit(state.copyWith(isAnonymousLoginInProgress: false));
+        emit(state.copyWith(
+            isAnonymousLoginInProgress: false,
+            isUserCheckedFromAuthService: true));
       }
     } else {
       await _authService.saveUserToDatabase(userModel: authUser);
@@ -66,7 +70,8 @@ class AuthCubit extends Cubit<AuthState> {
           await _authService.getDatabaseUser(id: authUser.id);
       updatedDatabaseUserOption.match(
         (updatedDBUser) {
-          emit(state.copyWith(userModel: updatedDBUser));
+          emit(state.copyWith(
+              userModel: updatedDBUser, isUserCheckedFromAuthService: true));
         },
         () {
           log("authhhhh no db user is found ${authUser.id}");
